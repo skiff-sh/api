@@ -1,0 +1,21 @@
+name: Buf Lint
+
+on:
+  pull_request:
+    types: [ opened, synchronize, reopened ]
+
+jobs:
+  buf-lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Buf
+        uses: bufbuild/buf-setup-action@v1
+        with:
+          version: latest
+      - uses: bufbuild/buf-lint-action@v1
+        with:
+          input: proto
