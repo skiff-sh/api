@@ -6,12 +6,11 @@ on:
 
 jobs:
   buf-lint:
+    name: Buf lint
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
       - name: Set up Buf
         uses: bufbuild/buf-setup-action@v1
         with:
