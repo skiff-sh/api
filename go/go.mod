@@ -1,4 +1,4 @@
-module github.com/skiff-sh/skiff/api/go
+module github.com/skiff-sh/api/go
 
 go 1.25.3
 
