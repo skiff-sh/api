@@ -18,11 +18,3 @@ jobs:
       - uses: bufbuild/buf-lint-action@v1
         with:
           input: proto
-  go-test:
-    name: Go test
-    uses: skiff-sh/gh-actions/.github/workflows/go-test.yml@master
-    secrets: inherit
-    permissions:
-      contents: read
-      pull-requests: write
-      issues: write
