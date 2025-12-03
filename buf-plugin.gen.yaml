@@ -1,0 +1,8 @@
+version: v2
+managed:
+  enabled: true
+plugins:
+  - local: ./protoc-gen-plain-go/protoc-gen-plain-go
+    out: go
+    opt:
+      - paths=source_relative

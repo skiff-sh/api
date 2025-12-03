@@ -1,4 +1,4 @@
-name: Buf Lint
+name: PR
 
 on:
   pull_request:
@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Set up Buf
         uses: bufbuild/buf-setup-action@v1
         with:
