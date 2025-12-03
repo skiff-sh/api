@@ -1,5 +1,18 @@
 {
   "$defs": {
+    "skiff.plugin.v1alpha1.Request.jsonschema.strict.json": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "additionalProperties": false,
+      "description": "A single object housing all supported requests.",
+      "properties": {
+        "write_file": {
+          "$ref": "#/$defs/skiff.plugin.v1alpha1.WriteFileRequest.jsonschema.strict.json",
+          "description": "Write a file to the user's machine."
+        }
+      },
+      "title": "Request",
+      "type": "object"
+    },
     "skiff.plugin.v1alpha1.WriteFileRequest.jsonschema.strict.json": {
       "$schema": "https://json-schema.org/draft/2020-12/schema",
       "additionalProperties": false,
@@ -22,7 +35,7 @@
       "type": "object"
     }
   },
-  "$id": "skiff.plugin.v1alpha1.WriteFileRequest.jsonschema.strict.bundle.json",
-  "$ref": "#/$defs/skiff.plugin.v1alpha1.WriteFileRequest.jsonschema.strict.json",
+  "$id": "skiff.plugin.v1alpha1.Request.jsonschema.strict.bundle.json",
+  "$ref": "#/$defs/skiff.plugin.v1alpha1.Request.jsonschema.strict.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema"
 }

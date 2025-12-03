@@ -4,6 +4,18 @@ package skiff.plugin.v1alpha1;
 
 option go_package = "github.com/skiff-sh/skiff/api/go/skiff/plugin/v1alpha1";
 
+// A single object housing all supported requests. All corresponding responses are of the same name on the Response object.
+message Request {
+  // Write a file to the user's machine.
+  WriteFileRequest write_file = 1 [json_name = "write_file"];
+}
+
+// A single object housing all supported responses.
+message Response {
+  WriteFileResponse write_file = 1 [json_name = "write_file"];
+}
+
+// Write a file to the user's machine.
 message WriteFileRequest {
   // The source path of this plugin.
   string path = 1;
