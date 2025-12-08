@@ -16,3 +16,6 @@ build.plain-go:
 
 croc.receive:
 	croc --yes --overwrite skiff123
+
+croc.send:
+	 CROC_SECRET=skiff123 croc send -c skiff123 --git --exclude  "api,.git,.idea,mocks" protoc-gen-plain-go/main.go
