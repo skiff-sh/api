@@ -21,7 +21,7 @@ package {{ .Package }}
 {{ range .Messages }}
 type {{ .Name }} struct {
 {{- range .Fields }}
-	{{ .GoName }} {{ .GoType }} ` + "`json:\"{{ .JSONName }}\"`" + `
+	{{ .GoName }} {{ .GoType }} ` + "`json:\"{{ .JSONName }},omitempty\"`" + `
 {{- end }}
 }
 {{ end }}

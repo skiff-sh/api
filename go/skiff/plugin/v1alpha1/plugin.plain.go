@@ -2,18 +2,18 @@
 package v1alpha1
 
 type Request struct {
-	WriteFile *WriteFileRequest `json:"write_file"`
+	WriteFile *WriteFileRequest `json:"write_file,omitempty"`
 }
 
 type Response struct {
-	WriteFile *WriteFileResponse `json:"write_file"`
+	WriteFile *WriteFileResponse `json:"write_file,omitempty"`
 }
 
 type WriteFileRequest struct {
-	Path   string `json:"path"`
-	Target string `json:"target"`
+	Path   string `json:"path,omitempty"`
+	Target string `json:"target,omitempty"`
 }
 
 type WriteFileResponse struct {
-	Contents []byte `json:"contents"`
+	Contents []byte `json:"contents,omitempty"`
 }
