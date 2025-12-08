@@ -86,22 +86,19 @@ func (Field_Type) EnumDescriptor() ([]byte, []int) {
 type File_Type int32
 
 const (
-	File_plain    File_Type = 0
-	File_template File_Type = 1
-	File_plugin   File_Type = 2
+	File_file   File_Type = 0
+	File_plugin File_Type = 1
 )
 
 // Enum value maps for File_Type.
 var (
 	File_Type_name = map[int32]string{
-		0: "plain",
-		1: "template",
-		2: "plugin",
+		0: "file",
+		1: "plugin",
 	}
 	File_Type_value = map[string]int32{
-		"plain":    0,
-		"template": 1,
-		"plugin":   2,
+		"file":   0,
+		"plugin": 1,
 	}
 )
 
@@ -400,12 +397,13 @@ func (x *Field) GetEnum() *structpb.ListValue {
 type File struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The path to the template relative to the root of the registry. The root of the registry is the directory housing your 'registry.json' file. Cannot be outside of the registry root.
+	// If the type is set to "plugin", this path must be to a WASM binary or a Go file (which will be compiled to WASM).
 	Path string `protobuf:"bytes,1,opt,name=path,proto3" json:"path,omitempty"`
 	// The target path of the rendered template relative to the root of the project. Accepts template parameters.
 	Target string `protobuf:"bytes,2,opt,name=target,proto3" json:"target,omitempty"`
 	// The raw contents of the file. You do not need to populate this manually. This field is set if the data is binary. It is mutually exclusive with the content field.
 	Raw []byte `protobuf:"bytes,3,opt,name=raw,proto3,oneof" json:"raw,omitempty"`
-	// The type of the file. Defaults to plain.
+	// The type of the file. Defaults to file.
 	Type File_Type `protobuf:"varint,4,opt,name=type,proto3,enum=skiff.registry.v1alpha1.File_Type" json:"type,omitempty"`
 	// The text contents of the file. This field will be populated if the file contains valid UTF-8 text. Otherwise, the contents are set in the raw field. You do not need to populate this manually.
 	Content       *string `protobuf:"bytes,5,opt,name=content,proto3,oneof" json:"content,omitempty"`
@@ -468,7 +466,7 @@ func (x *File) GetType() File_Type {
 	if x != nil {
 		return x.Type
 	}
-	return File_plain
+	return File_file
 }
 
 func (x *File) GetContent() string {
@@ -580,18 +578,17 @@ const file_skiff_registry_v1alpha1_registry_proto_rawDesc = "" +
 	"\f_descriptionB\n" +
 	"\n" +
 	"\b_defaultB\a\n" +
-	"\x05_enum\"\xf3\x01\n" +
+	"\x05_enum\"\xe4\x01\n" +
 	"\x04File\x12\x1b\n" +
 	"\x04path\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04path\x12\x1f\n" +
 	"\x06target\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x06target\x12\x15\n" +
 	"\x03raw\x18\x03 \x01(\fH\x00R\x03raw\x88\x01\x01\x126\n" +
 	"\x04type\x18\x04 \x01(\x0e2\".skiff.registry.v1alpha1.File.TypeR\x04type\x12\x1d\n" +
-	"\acontent\x18\x05 \x01(\tH\x01R\acontent\x88\x01\x01\"+\n" +
-	"\x04Type\x12\t\n" +
-	"\x05plain\x10\x00\x12\f\n" +
-	"\btemplate\x10\x01\x12\n" +
+	"\acontent\x18\x05 \x01(\tH\x01R\acontent\x88\x01\x01\"\x1c\n" +
+	"\x04Type\x12\b\n" +
+	"\x04file\x10\x00\x12\n" +
 	"\n" +
-	"\x06plugin\x10\x02B\x06\n" +
+	"\x06plugin\x10\x01B\x06\n" +
 	"\x04_rawB\n" +
 	"\n" +
 	"\b_contentB\xe4\x01\n" +

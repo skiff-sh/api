@@ -6,8 +6,37 @@ option go_package = "github.com/skiff-sh/skiff/api/go/skiff/plugin/v1alpha1";
 
 // A single object housing all supported requests. All corresponding responses are of the same name on the Response object.
 message Request {
+  // Metadata for the request.
+  RequestMetadata metadata = 1;
+
+  // The schema data by name specified by the user. All available fields can be found in the "schema" field of the package.
+  map<string, Value> data = 2;
+
   // Write a file to the user's machine.
-  WriteFileRequest write_file = 1 [json_name = "write_file"];
+  WriteFileRequest write_file = 3 [json_name = "write_file"];
+}
+
+message RequestMetadata {
+  // The name of the package that initiated the request.
+  string package = 1;
+
+  // The intended target specified in the package.
+  string target = 2;
+
+  // The path of the original plugin file in the package.
+  string path = 3;
+}
+
+message Value {
+  message List {
+    repeated string strings = 1;
+    repeated double numbers = 2;
+  }
+
+  optional string string = 1;
+  optional bool bool = 2;
+  optional double number = 3;
+  optional List list = 4;
 }
 
 // A single object housing all supported responses.
