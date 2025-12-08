@@ -26,6 +26,22 @@ message Package {
 
   // If a field does not have a default, it is marked as required.
   optional Schema schema = 4;
+
+  // Any needed permissions for your package to function.
+  optional PackagePermissions permissions = 5;
+}
+
+message PackagePermissions {
+  // buf:lint:ignore ENUM_VALUE_UPPER_SNAKE_CASE
+  // buf:lint:ignore ENUM_VALUE_PREFIX
+  // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
+  enum PluginPermission {
+    // Grant RO access to the user's current working directory.
+    cwd_ro = 0;
+  }
+
+  // Permissions for all plugins in the package.
+  repeated PluginPermission plugin = 1;
 }
 
 message Schema {
@@ -39,7 +55,6 @@ message Schema {
 }
 
 message Field {
-  // buf:lint:ignore ENUM_VALUE_UPPER_SNAKE_CASE
   // buf:lint:ignore ENUM_VALUE_UPPER_SNAKE_CASE
   // buf:lint:ignore ENUM_VALUE_PREFIX
   // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
@@ -110,7 +125,6 @@ message Field {
 }
 
 message File {
-  // buf:lint:ignore ENUM_VALUE_UPPER_SNAKE_CASE
   // buf:lint:ignore ENUM_VALUE_UPPER_SNAKE_CASE
   // buf:lint:ignore ENUM_VALUE_PREFIX
   // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
