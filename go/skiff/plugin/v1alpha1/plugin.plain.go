@@ -11,6 +11,7 @@ const (
 
 // A single object housing all supported requests. All corresponding responses are of the same name on the Response object.
 type Request struct {
+
 	//  Metadata for the request.
 	Metadata *RequestMetadata `json:"metadata,omitempty"`
 	//  The schema data by name specified by the user. All available fields can be found in the "schema" field of the package.
