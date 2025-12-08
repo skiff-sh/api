@@ -4,20 +4,7 @@
       "$schema": "https://json-schema.org/draft/2020-12/schema",
       "additionalProperties": false,
       "description": "Write a file to the user's machine.",
-      "properties": {
-        "path": {
-          "description": "The source path of this plugin.",
-          "type": "string"
-        },
-        "target": {
-          "description": "The intended target filepath to be edited/created by this plugin.",
-          "type": "string"
-        }
-      },
-      "required": [
-        "path",
-        "target"
-      ],
+      "properties": {},
       "title": "Write File Request",
       "type": "object"
     }

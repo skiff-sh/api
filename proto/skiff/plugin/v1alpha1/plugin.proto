@@ -13,7 +13,7 @@ message Request {
   map<string, Value> data = 2;
 
   // Write a file to the user's machine.
-  WriteFileRequest write_file = 3 [json_name = "write_file"];
+  optional WriteFileRequest write_file = 3 [json_name = "write_file"];
 }
 
 message RequestMetadata {
@@ -41,17 +41,34 @@ message Value {
 
 // A single object housing all supported responses.
 message Response {
-  WriteFileResponse write_file = 1 [json_name = "write_file"];
+  // If any issues are encountered, surface them to the user.
+  repeated Issue issues = 1;
+
+  // The response body for the write_file request.
+  optional WriteFileResponse write_file = 2 [json_name = "write_file"];
+}
+
+message Issue {
+  enum Level {
+    // Displays nothing. Essentially a no-op.
+    LEVEL_UNSPECIFIED = 0;
+
+    // Displays a message to the user but does not exit.
+    LEVEL_WARN = 1;
+
+    // Displays a message to the user and exits.
+    LEVEL_ERROR = 2;
+  }
+
+  // The level of the issue. If set to error, the command fails.
+  Level level = 1;
+
+  // The message surfaced to the user.
+  string message = 2;
 }
 
 // Write a file to the user's machine.
-message WriteFileRequest {
-  // The source path of this plugin.
-  string path = 1;
-
-  // The intended target filepath to be edited/created by this plugin.
-  string target = 2;
-}
+message WriteFileRequest {}
 
 message WriteFileResponse {
   // The new contents of the file.
