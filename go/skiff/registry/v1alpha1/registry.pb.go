@@ -672,10 +672,10 @@ type File_Source struct {
 	Raw []byte `protobuf:"bytes,1,opt,name=raw,proto3,oneof" json:"raw,omitempty"`
 	// The text contents of the file. This field will be populated if the file contains valid UTF-8 text.
 	Text *string `protobuf:"bytes,2,opt,name=text,proto3,oneof" json:"text,omitempty"`
-	// The path of the file that contains the contents within the same package. This is useful for plugins as the contents
+	// The index of the file that contains the contents within the same package. This is useful for plugins as the contents
 	// can be large. It is better to have a single plugin that can handle multiple files than to have 1 unique plugin per
 	// file.
-	FilePath      *string `protobuf:"bytes,3,opt,name=file_path,proto3,oneof" json:"file_path,omitempty"`
+	FileIndex     *int32 `protobuf:"varint,3,opt,name=file_index,proto3,oneof" json:"file_index,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -724,11 +724,11 @@ func (x *File_Source) GetText() string {
 	return ""
 }
 
-func (x *File_Source) GetFilePath() string {
-	if x != nil && x.FilePath != nil {
-		return *x.FilePath
+func (x *File_Source) GetFileIndex() int32 {
+	if x != nil && x.FileIndex != nil {
+		return *x.FileIndex
 	}
-	return ""
+	return 0
 }
 
 var File_skiff_registry_v1alpha1_registry_proto protoreflect.FileDescriptor
@@ -788,20 +788,21 @@ const file_skiff_registry_v1alpha1_registry_proto_rawDesc = "" +
 	"\f_descriptionB\n" +
 	"\n" +
 	"\b_defaultB\a\n" +
-	"\x05_enum\"\xe4\x02\n" +
+	"\x05_enum\"\xe7\x02\n" +
 	"\x04File\x12\x1b\n" +
 	"\x04path\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04path\x12\x1f\n" +
 	"\x06target\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x06target\x126\n" +
 	"\x04type\x18\x03 \x01(\x0e2\".skiff.registry.v1alpha1.File.TypeR\x04type\x12A\n" +
-	"\x06source\x18\x04 \x01(\v2$.skiff.registry.v1alpha1.File.SourceH\x00R\x06source\x88\x01\x01\x1az\n" +
+	"\x06source\x18\x04 \x01(\v2$.skiff.registry.v1alpha1.File.SourceH\x00R\x06source\x88\x01\x01\x1a}\n" +
 	"\x06Source\x12\x15\n" +
 	"\x03raw\x18\x01 \x01(\fH\x00R\x03raw\x88\x01\x01\x12\x17\n" +
-	"\x04text\x18\x02 \x01(\tH\x01R\x04text\x88\x01\x01\x12!\n" +
-	"\tfile_path\x18\x03 \x01(\tH\x02R\tfile_path\x88\x01\x01B\x06\n" +
-	"\x04_rawB\a\n" +
-	"\x05_textB\f\n" +
+	"\x04text\x18\x02 \x01(\tH\x01R\x04text\x88\x01\x01\x12#\n" +
 	"\n" +
-	"_file_path\"\x1c\n" +
+	"file_index\x18\x03 \x01(\x05H\x02R\n" +
+	"file_index\x88\x01\x01B\x06\n" +
+	"\x04_rawB\a\n" +
+	"\x05_textB\r\n" +
+	"\v_file_index\"\x1c\n" +
 	"\x04Type\x12\b\n" +
 	"\x04file\x10\x00\x12\n" +
 	"\n" +

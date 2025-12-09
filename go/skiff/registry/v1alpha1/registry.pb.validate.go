@@ -1219,8 +1219,8 @@ func (m *File_Source) validate(all bool) error {
 		// no validation rules for Text
 	}
 
-	if m.FilePath != nil {
-		// no validation rules for FilePath
+	if m.FileIndex != nil {
+		// no validation rules for FileIndex
 	}
 
 	if len(errors) > 0 {
