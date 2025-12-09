@@ -10,7 +10,7 @@
             "enum": [
               "cwd_ro"
             ],
-            "title": "Plugin Permission",
+            "title": "Plugin",
             "type": "string"
           },
           "type": "array"

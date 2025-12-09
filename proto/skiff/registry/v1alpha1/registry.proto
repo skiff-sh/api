@@ -31,17 +31,22 @@ message Package {
   optional PackagePermissions permissions = 5;
 }
 
+message Plugin {
+  // The contents of the plugin
+  bytes content = 1;
+}
+
 message PackagePermissions {
   // buf:lint:ignore ENUM_VALUE_UPPER_SNAKE_CASE
   // buf:lint:ignore ENUM_VALUE_PREFIX
   // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
-  enum PluginPermission {
+  enum Plugin {
     // Grant RO access to the user's current working directory.
     cwd_ro = 0;
   }
 
   // Permissions for all plugins in the package.
-  repeated PluginPermission plugin = 1;
+  repeated Plugin plugin = 1;
 }
 
 message Schema {
@@ -133,19 +138,30 @@ message File {
     plugin = 1;
   }
 
-  // The path to the template relative to the root of the registry. The root of the registry is the directory housing your 'registry.json' file. Cannot be outside of the registry root.
+  // The source of the contents for this File. This does not need to be populated manually. All fields are mutually exclusive.
+  message Source {
+    // The raw contents of the file. This field is set if the data is binary.
+    optional bytes raw = 1;
+
+    // The text contents of the file. This field will be populated if the file contains valid UTF-8 text.
+    optional string text = 2;
+
+    // The path of the file that contains the contents within the same package. This is useful for plugins as the contents
+    // can be large. It is better to have a single plugin that can handle multiple files than to have 1 unique plugin per
+    // file.
+    optional string file_path = 3 [json_name = "file_path"];
+  }
+
+  // The path to the file relative to the root of the registry. The root of the registry is the directory housing your 'registry.json' file. Cannot be outside of the registry root.
   // If the type is set to "plugin", this path must be to a WASM binary or a Go file (which will be compiled to WASM).
   string path = 1 [(buf.validate.field).string.min_len = 1];
 
-  // The target path of the rendered template relative to the root of the project. Accepts template parameters.
+  // The target path of the file relative to the root of the project. Accepts template parameters.
   string target = 2 [(buf.validate.field).string.min_len = 1];
 
-  // The raw contents of the file. You do not need to populate this manually. This field is set if the data is binary. It is mutually exclusive with the content field.
-  optional bytes raw = 3;
-
   // The type of the file. Defaults to file.
-  Type type = 4;
+  Type type = 3;
 
-  // The text contents of the file. This field will be populated if the file contains valid UTF-8 text. Otherwise, the contents are set in the raw field. You do not need to populate this manually.
-  optional string content = 5;
+  // The source for the contents of the file. This does not need to be set manually as it's populated by the "skiff build" command.
+  optional Source source = 4;
 }
