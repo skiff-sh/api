@@ -31,15 +31,19 @@ type PackagePermissions_Plugin int32
 const (
 	// Grant RO access to the user's current working directory.
 	PackagePermissions_cwd_ro PackagePermissions_Plugin = 0
+	// Grant access to all available permissions.
+	PackagePermissions_all PackagePermissions_Plugin = 1
 )
 
 // Enum value maps for PackagePermissions_Plugin.
 var (
 	PackagePermissions_Plugin_name = map[int32]string{
 		0: "cwd_ro",
+		1: "all",
 	}
 	PackagePermissions_Plugin_value = map[string]int32{
 		"cwd_ro": 0,
+		"all":    1,
 	}
 )
 
@@ -749,12 +753,13 @@ const file_skiff_registry_v1alpha1_registry_proto_rawDesc = "" +
 	"\a_schemaB\x0e\n" +
 	"\f_permissions\"\"\n" +
 	"\x06Plugin\x12\x18\n" +
-	"\acontent\x18\x01 \x01(\fR\acontent\"v\n" +
+	"\acontent\x18\x01 \x01(\fR\acontent\"\x7f\n" +
 	"\x12PackagePermissions\x12J\n" +
-	"\x06plugin\x18\x01 \x03(\x0e22.skiff.registry.v1alpha1.PackagePermissions.PluginR\x06plugin\"\x14\n" +
+	"\x06plugin\x18\x01 \x03(\x0e22.skiff.registry.v1alpha1.PackagePermissions.PluginR\x06plugin\"\x1d\n" +
 	"\x06Plugin\x12\n" +
 	"\n" +
-	"\x06cwd_ro\x10\x00\"\xa0\x01\n" +
+	"\x06cwd_ro\x10\x00\x12\a\n" +
+	"\x03all\x10\x01\"\xa0\x01\n" +
 	"\x06Schema\x126\n" +
 	"\x06fields\x18\x01 \x03(\v2\x1e.skiff.registry.v1alpha1.FieldR\x06fields:^\xbaH[\x1aY\n" +
 	"\x12unique_field_names\x12\x1eall field names must be unique\x1a#this.fields.map(v, v.name).unique()\"\xa1\n" +

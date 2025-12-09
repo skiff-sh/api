@@ -43,6 +43,8 @@ message PackagePermissions {
   enum Plugin {
     // Grant RO access to the user's current working directory.
     cwd_ro = 0;
+    // Grant access to all available permissions.
+    all = 1;
   }
 
   // Permissions for all plugins in the package.

@@ -8,7 +8,8 @@
           "description": "Permissions for all plugins in the package.",
           "items": {
             "enum": [
-              "cwd_ro"
+              "cwd_ro",
+              "all"
             ],
             "title": "Plugin",
             "type": "string"
