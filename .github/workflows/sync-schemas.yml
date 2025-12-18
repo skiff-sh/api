@@ -29,12 +29,11 @@ jobs:
         run: |
           rsync -av --delete \
             jsonschema/ \
-            skiff/pkg/embeded/jsonschema/
+            ../skiff/pkg/embeded/jsonschema/
 
       - name: Commit and push changes
+        working-directory: skiff
         run: |
-          cd skiff
-          
           if git status --porcelain | grep .; then
             git config user.name "skiff-sync-bot"
             git config user.email "sync@skiff.sh"
