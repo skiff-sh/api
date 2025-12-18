@@ -1,0 +1,46 @@
+name: Sync JSON schema
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "jsonschema/**"
+
+jobs:
+  sync:
+    name: Sync
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout api repo
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+
+      - name: Checkout skiff repo
+        uses: actions/checkout@v6
+        with:
+          repository: skiff-sh/skiff
+          ref: main
+          token: ${{ secrets.ACTIONS_TOKEN }}
+          path: skiff
+
+      - name: Sync jsonschema
+        run: |
+          rsync -av --delete \
+            jsonschema/ \
+            skiff/pkg/embeded/jsonschema/
+
+      - name: Commit and push changes
+        working-directory: skiff
+        run: |
+          if git status --porcelain | grep .; then
+            git config user.name "skiff-sync-bot"
+            git config user.email "sync@skiff.sh"
+
+            git add pkg/embeded/jsonschema
+            git commit -m "sync(jsonschema): update from skiff-sh/api"
+            git push origin main
+          else
+            echo "No changes to sync"
+          fi

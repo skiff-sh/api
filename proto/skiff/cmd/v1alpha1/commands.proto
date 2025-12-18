@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package skiff.cmd.v1alpha1;
+
+import "buf/validate/validate.proto";
+import "skiff/registry/v1alpha1/registry.proto";
+
+option go_package = "github.com/skiff-sh/skiff/api/go/skiff/cmd/v1alpha1";
+
+// The request data needed to add a package.
+message AddPackageRequest {
+  // An absolute filepath to the project root. This is used as the root directory to place all files within.
+  string root = 1 [(buf.validate.field).string.min_len = 1];
+
+  // The list of file paths to packages or http(s) URLs. HTTP(s) URLs must start with "http(s)://", otherwise, it's treated as a filepath.
+  repeated string packages = 2 [(buf.validate.field).repeated.min_items = 1];
+
+  // The list of permissions available to plugins that are called within the packages. If none are specified, no permissions are granted to the user's system.
+  repeated skiff.registry.v1alpha1.PackagePermissions.Plugin plugin_permissions = 3 [json_name = "plugin_permissions"];
+}
+
+// The response data for AddPackageRequest.
+message AddPackageResponse {
+  // A list of file diffs that should be applied to the user's machine. These use the absolute path using the "root" field passed into the request.
+  // There is a single unified diff per file.
+  repeated string unified_diffs = 1 [json_name = "unified_diffs"];
+}
+
+message ListPackagesRequest {
+  // The URLs or local file paths to packages.
+  repeated string packages = 1;
+}
+
+message ListPackagesResponse {
+  // A list of packages from the registry. If the file is of type "plugin" the "source" will not be populated.
+  repeated skiff.registry.v1alpha1.Package packages = 1;
+}
