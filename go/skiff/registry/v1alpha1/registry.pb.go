@@ -812,8 +812,8 @@ const file_skiff_registry_v1alpha1_registry_proto_rawDesc = "" +
 	"\x04file\x10\x00\x12\n" +
 	"\n" +
 	"\x06plugin\x10\x01B\t\n" +
-	"\a_sourceB\xe4\x01\n" +
-	"\x1bcom.skiff.registry.v1alpha1B\rRegistryProtoP\x01Z8github.com/skiff-sh/skiff/api/go/skiff/registry/v1alpha1\xa2\x02\x03SRX\xaa\x02\x17Skiff.Registry.V1alpha1\xca\x02\x17Skiff\\Registry\\V1alpha1\xe2\x02#Skiff\\Registry\\V1alpha1\\GPBMetadata\xea\x02\x19Skiff::Registry::V1alpha1b\x06proto3"
+	"\a_sourceB\xde\x01\n" +
+	"\x1bcom.skiff.registry.v1alpha1B\rRegistryProtoP\x01Z2github.com/skiff-sh/api/go/skiff/registry/v1alpha1\xa2\x02\x03SRX\xaa\x02\x17Skiff.Registry.V1alpha1\xca\x02\x17Skiff\\Registry\\V1alpha1\xe2\x02#Skiff\\Registry\\V1alpha1\\GPBMetadata\xea\x02\x19Skiff::Registry::V1alpha1b\x06proto3"
 
 var (
 	file_skiff_registry_v1alpha1_registry_proto_rawDescOnce sync.Once

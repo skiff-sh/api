@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package skiff.plugin.v1alpha1;
 
-option go_package = "github.com/skiff-sh/skiff/api/go/skiff/plugin/v1alpha1";
+option go_package = "github.com/skiff-sh/api/go/skiff/plugin/v1alpha1";
 
 // A single object housing all supported requests. All corresponding responses are of the same name on the Response object.
 message Request {

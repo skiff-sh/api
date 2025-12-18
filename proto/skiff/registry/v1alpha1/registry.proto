@@ -5,7 +5,7 @@ package skiff.registry.v1alpha1;
 import "buf/validate/validate.proto";
 import "google/protobuf/struct.proto";
 
-option go_package = "github.com/skiff-sh/skiff/api/go/skiff/registry/v1alpha1";
+option go_package = "github.com/skiff-sh/api/go/skiff/registry/v1alpha1";
 
 message Registry {
   string name = 1 [(buf.validate.field).string.min_len = 1];

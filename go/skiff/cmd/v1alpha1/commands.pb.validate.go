@@ -18,7 +18,7 @@ import (
 
 	"google.golang.org/protobuf/types/known/anypb"
 
-	v1alpha1 "github.com/skiff-sh/skiff/api/go/skiff/registry/v1alpha1"
+	v1alpha1 "github.com/skiff-sh/api/go/skiff/registry/v1alpha1"
 )
 
 // ensure the imports are used

@@ -5,7 +5,7 @@ package skiff.cmd.v1alpha1;
 import "buf/validate/validate.proto";
 import "skiff/registry/v1alpha1/registry.proto";
 
-option go_package = "github.com/skiff-sh/skiff/api/go/skiff/cmd/v1alpha1";
+option go_package = "github.com/skiff-sh/api/go/skiff/cmd/v1alpha1";
 
 // The request data needed to add a package.
 message AddPackageRequest {

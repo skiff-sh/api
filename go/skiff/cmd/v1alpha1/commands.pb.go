@@ -8,7 +8,7 @@ package v1alpha1
 
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
-	v1alpha1 "github.com/skiff-sh/skiff/api/go/skiff/registry/v1alpha1"
+	v1alpha1 "github.com/skiff-sh/api/go/skiff/registry/v1alpha1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -238,8 +238,8 @@ const file_skiff_cmd_v1alpha1_commands_proto_rawDesc = "" +
 	"\x13ListPackagesRequest\x12\x1a\n" +
 	"\bpackages\x18\x01 \x03(\tR\bpackages\"T\n" +
 	"\x14ListPackagesResponse\x12<\n" +
-	"\bpackages\x18\x01 \x03(\v2 .skiff.registry.v1alpha1.PackageR\bpackagesB\xc6\x01\n" +
-	"\x16com.skiff.cmd.v1alpha1B\rCommandsProtoP\x01Z3github.com/skiff-sh/skiff/api/go/skiff/cmd/v1alpha1\xa2\x02\x03SCX\xaa\x02\x12Skiff.Cmd.V1alpha1\xca\x02\x12Skiff\\Cmd\\V1alpha1\xe2\x02\x1eSkiff\\Cmd\\V1alpha1\\GPBMetadata\xea\x02\x14Skiff::Cmd::V1alpha1b\x06proto3"
+	"\bpackages\x18\x01 \x03(\v2 .skiff.registry.v1alpha1.PackageR\bpackagesB\xc0\x01\n" +
+	"\x16com.skiff.cmd.v1alpha1B\rCommandsProtoP\x01Z-github.com/skiff-sh/api/go/skiff/cmd/v1alpha1\xa2\x02\x03SCX\xaa\x02\x12Skiff.Cmd.V1alpha1\xca\x02\x12Skiff\\Cmd\\V1alpha1\xe2\x02\x1eSkiff\\Cmd\\V1alpha1\\GPBMetadata\xea\x02\x14Skiff::Cmd::V1alpha1b\x06proto3"
 
 var (
 	file_skiff_cmd_v1alpha1_commands_proto_rawDescOnce sync.Once
