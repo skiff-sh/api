@@ -38,7 +38,7 @@ jobs:
             git config user.name "skiff-sync-bot"
             git config user.email "sync@skiff.sh"
 
-            git add pkg/embeded/jsonschema
+            git add pkg/embedded/jsonschema
             git commit -m "sync(jsonschema): update from skiff-sh/api"
             git push origin main
           else
