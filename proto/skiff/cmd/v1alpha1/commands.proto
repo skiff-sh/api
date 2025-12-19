@@ -3,11 +3,13 @@ syntax = "proto3";
 package skiff.cmd.v1alpha1;
 
 import "buf/validate/validate.proto";
+import "google/protobuf/struct.proto";
 import "skiff/registry/v1alpha1/registry.proto";
 
 option go_package = "github.com/skiff-sh/api/go/skiff/cmd/v1alpha1";
 
-// The request data needed to add a package.
+// Generates all files within the package and returns the diffs that would result from them being written. Packages hold both templates and WASM plugins that are
+// executed locally to edit local files.
 message AddPackageRequest {
   // An absolute filepath to the project root. This is used as the root directory to place all files within.
   string root = 1 [(buf.validate.field).string.min_len = 1];
@@ -17,6 +19,9 @@ message AddPackageRequest {
 
   // The list of permissions available to plugins that are called within the packages. If none are specified, no permissions are granted to the user's system.
   repeated skiff.registry.v1alpha1.PackagePermissions.Plugin plugin_permissions = 3 [json_name = "plugin_permissions"];
+
+  // The
+  google.protobuf.Struct data = 4;
 }
 
 // The response data for AddPackageRequest.
@@ -26,12 +31,41 @@ message AddPackageResponse {
   repeated string unified_diffs = 1 [json_name = "unified_diffs"];
 }
 
-message ListPackagesRequest {
-  // The URLs or local file paths to packages.
+// Get detailed information about a set of packages. Includes the contents of the files that the packages would add if add package was called.
+message ViewPackagesRequest {
+  // The URLs or local file paths to packages e.g. ./skiff/public/r/create-http-route.json
   repeated string packages = 1;
 }
 
-message ListPackagesResponse {
-  // A list of packages from the registry. If the file is of type "plugin" the "source" will not be populated.
+message ViewPackagesResponse {
+  // Returns the entirety of the contents of the package. If the package contains a plugin file, the contents of the file are not returned as they are just WASM bytes.
   repeated skiff.registry.v1alpha1.Package packages = 1;
+}
+
+// List all packages within a set of registries. These packages do not include the contents of the files. To get more details about a package use the view package
+// call.
+message ListPackagesRequest {
+  // The URLs or local file paths to registries e.g. ./.skiff/registry.json
+  repeated string registries = 1;
+}
+
+message ListPackagesResponse {
+  message PackagePreview {
+    // The name of the file with the extension.
+    string name = 1;
+
+    // The type of the file.
+    skiff.registry.v1alpha1.File.Type type = 2;
+
+    // The registry that this package belongs to.
+    string registry = 3;
+
+    // A short description of the package.
+    optional string description = 4;
+
+    // Either the http(s) URL or the local file path to add/view the package.
+    string path = 5;
+  }
+
+  repeated PackagePreview packages = 1;
 }

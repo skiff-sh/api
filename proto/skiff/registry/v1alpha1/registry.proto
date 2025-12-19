@@ -31,11 +31,6 @@ message Package {
   optional PackagePermissions permissions = 5;
 }
 
-message Plugin {
-  // The contents of the plugin
-  bytes content = 1;
-}
-
 message PackagePermissions {
   // buf:lint:ignore ENUM_VALUE_UPPER_SNAKE_CASE
   // buf:lint:ignore ENUM_VALUE_PREFIX

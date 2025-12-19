@@ -71,7 +71,7 @@ func (x PackagePermissions_Plugin) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use PackagePermissions_Plugin.Descriptor instead.
 func (PackagePermissions_Plugin) EnumDescriptor() ([]byte, []int) {
-	return file_skiff_registry_v1alpha1_registry_proto_rawDescGZIP(), []int{3, 0}
+	return file_skiff_registry_v1alpha1_registry_proto_rawDescGZIP(), []int{2, 0}
 }
 
 // buf:lint:ignore ENUM_VALUE_UPPER_SNAKE_CASE
@@ -126,7 +126,7 @@ func (x Field_Type) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use Field_Type.Descriptor instead.
 func (Field_Type) EnumDescriptor() ([]byte, []int) {
-	return file_skiff_registry_v1alpha1_registry_proto_rawDescGZIP(), []int{5, 0}
+	return file_skiff_registry_v1alpha1_registry_proto_rawDescGZIP(), []int{4, 0}
 }
 
 // buf:lint:ignore ENUM_VALUE_UPPER_SNAKE_CASE
@@ -175,7 +175,7 @@ func (x File_Type) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use File_Type.Descriptor instead.
 func (File_Type) EnumDescriptor() ([]byte, []int) {
-	return file_skiff_registry_v1alpha1_registry_proto_rawDescGZIP(), []int{6, 0}
+	return file_skiff_registry_v1alpha1_registry_proto_rawDescGZIP(), []int{5, 0}
 }
 
 type Registry struct {
@@ -318,51 +318,6 @@ func (x *Package) GetPermissions() *PackagePermissions {
 	return nil
 }
 
-type Plugin struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// The contents of the plugin
-	Content       []byte `protobuf:"bytes,1,opt,name=content,proto3" json:"content,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *Plugin) Reset() {
-	*x = Plugin{}
-	mi := &file_skiff_registry_v1alpha1_registry_proto_msgTypes[2]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *Plugin) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Plugin) ProtoMessage() {}
-
-func (x *Plugin) ProtoReflect() protoreflect.Message {
-	mi := &file_skiff_registry_v1alpha1_registry_proto_msgTypes[2]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Plugin.ProtoReflect.Descriptor instead.
-func (*Plugin) Descriptor() ([]byte, []int) {
-	return file_skiff_registry_v1alpha1_registry_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *Plugin) GetContent() []byte {
-	if x != nil {
-		return x.Content
-	}
-	return nil
-}
-
 type PackagePermissions struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Permissions for all plugins in the package.
@@ -373,7 +328,7 @@ type PackagePermissions struct {
 
 func (x *PackagePermissions) Reset() {
 	*x = PackagePermissions{}
-	mi := &file_skiff_registry_v1alpha1_registry_proto_msgTypes[3]
+	mi := &file_skiff_registry_v1alpha1_registry_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -385,7 +340,7 @@ func (x *PackagePermissions) String() string {
 func (*PackagePermissions) ProtoMessage() {}
 
 func (x *PackagePermissions) ProtoReflect() protoreflect.Message {
-	mi := &file_skiff_registry_v1alpha1_registry_proto_msgTypes[3]
+	mi := &file_skiff_registry_v1alpha1_registry_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -398,7 +353,7 @@ func (x *PackagePermissions) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PackagePermissions.ProtoReflect.Descriptor instead.
 func (*PackagePermissions) Descriptor() ([]byte, []int) {
-	return file_skiff_registry_v1alpha1_registry_proto_rawDescGZIP(), []int{3}
+	return file_skiff_registry_v1alpha1_registry_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *PackagePermissions) GetPlugin() []PackagePermissions_Plugin {
@@ -417,7 +372,7 @@ type Schema struct {
 
 func (x *Schema) Reset() {
 	*x = Schema{}
-	mi := &file_skiff_registry_v1alpha1_registry_proto_msgTypes[4]
+	mi := &file_skiff_registry_v1alpha1_registry_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -429,7 +384,7 @@ func (x *Schema) String() string {
 func (*Schema) ProtoMessage() {}
 
 func (x *Schema) ProtoReflect() protoreflect.Message {
-	mi := &file_skiff_registry_v1alpha1_registry_proto_msgTypes[4]
+	mi := &file_skiff_registry_v1alpha1_registry_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -442,7 +397,7 @@ func (x *Schema) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Schema.ProtoReflect.Descriptor instead.
 func (*Schema) Descriptor() ([]byte, []int) {
-	return file_skiff_registry_v1alpha1_registry_proto_rawDescGZIP(), []int{4}
+	return file_skiff_registry_v1alpha1_registry_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *Schema) GetFields() []*Field {
@@ -472,7 +427,7 @@ type Field struct {
 
 func (x *Field) Reset() {
 	*x = Field{}
-	mi := &file_skiff_registry_v1alpha1_registry_proto_msgTypes[5]
+	mi := &file_skiff_registry_v1alpha1_registry_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -484,7 +439,7 @@ func (x *Field) String() string {
 func (*Field) ProtoMessage() {}
 
 func (x *Field) ProtoReflect() protoreflect.Message {
-	mi := &file_skiff_registry_v1alpha1_registry_proto_msgTypes[5]
+	mi := &file_skiff_registry_v1alpha1_registry_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -497,7 +452,7 @@ func (x *Field) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Field.ProtoReflect.Descriptor instead.
 func (*Field) Descriptor() ([]byte, []int) {
-	return file_skiff_registry_v1alpha1_registry_proto_rawDescGZIP(), []int{5}
+	return file_skiff_registry_v1alpha1_registry_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *Field) GetName() string {
@@ -559,7 +514,7 @@ type File struct {
 
 func (x *File) Reset() {
 	*x = File{}
-	mi := &file_skiff_registry_v1alpha1_registry_proto_msgTypes[6]
+	mi := &file_skiff_registry_v1alpha1_registry_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -571,7 +526,7 @@ func (x *File) String() string {
 func (*File) ProtoMessage() {}
 
 func (x *File) ProtoReflect() protoreflect.Message {
-	mi := &file_skiff_registry_v1alpha1_registry_proto_msgTypes[6]
+	mi := &file_skiff_registry_v1alpha1_registry_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -584,7 +539,7 @@ func (x *File) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use File.ProtoReflect.Descriptor instead.
 func (*File) Descriptor() ([]byte, []int) {
-	return file_skiff_registry_v1alpha1_registry_proto_rawDescGZIP(), []int{6}
+	return file_skiff_registry_v1alpha1_registry_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *File) GetPath() string {
@@ -627,7 +582,7 @@ type Field_SubField struct {
 
 func (x *Field_SubField) Reset() {
 	*x = Field_SubField{}
-	mi := &file_skiff_registry_v1alpha1_registry_proto_msgTypes[7]
+	mi := &file_skiff_registry_v1alpha1_registry_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -639,7 +594,7 @@ func (x *Field_SubField) String() string {
 func (*Field_SubField) ProtoMessage() {}
 
 func (x *Field_SubField) ProtoReflect() protoreflect.Message {
-	mi := &file_skiff_registry_v1alpha1_registry_proto_msgTypes[7]
+	mi := &file_skiff_registry_v1alpha1_registry_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -652,7 +607,7 @@ func (x *Field_SubField) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Field_SubField.ProtoReflect.Descriptor instead.
 func (*Field_SubField) Descriptor() ([]byte, []int) {
-	return file_skiff_registry_v1alpha1_registry_proto_rawDescGZIP(), []int{5, 0}
+	return file_skiff_registry_v1alpha1_registry_proto_rawDescGZIP(), []int{4, 0}
 }
 
 func (x *Field_SubField) GetType() Field_Type {
@@ -686,7 +641,7 @@ type File_Source struct {
 
 func (x *File_Source) Reset() {
 	*x = File_Source{}
-	mi := &file_skiff_registry_v1alpha1_registry_proto_msgTypes[8]
+	mi := &file_skiff_registry_v1alpha1_registry_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -698,7 +653,7 @@ func (x *File_Source) String() string {
 func (*File_Source) ProtoMessage() {}
 
 func (x *File_Source) ProtoReflect() protoreflect.Message {
-	mi := &file_skiff_registry_v1alpha1_registry_proto_msgTypes[8]
+	mi := &file_skiff_registry_v1alpha1_registry_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -711,7 +666,7 @@ func (x *File_Source) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use File_Source.ProtoReflect.Descriptor instead.
 func (*File_Source) Descriptor() ([]byte, []int) {
-	return file_skiff_registry_v1alpha1_registry_proto_rawDescGZIP(), []int{6, 0}
+	return file_skiff_registry_v1alpha1_registry_proto_rawDescGZIP(), []int{5, 0}
 }
 
 func (x *File_Source) GetRaw() []byte {
@@ -751,9 +706,7 @@ const file_skiff_registry_v1alpha1_registry_proto_rawDesc = "" +
 	"\x06schema\x18\x04 \x01(\v2\x1f.skiff.registry.v1alpha1.SchemaH\x00R\x06schema\x88\x01\x01\x12R\n" +
 	"\vpermissions\x18\x05 \x01(\v2+.skiff.registry.v1alpha1.PackagePermissionsH\x01R\vpermissions\x88\x01\x01B\t\n" +
 	"\a_schemaB\x0e\n" +
-	"\f_permissions\"\"\n" +
-	"\x06Plugin\x12\x18\n" +
-	"\acontent\x18\x01 \x01(\fR\acontent\"\x7f\n" +
+	"\f_permissions\"\x7f\n" +
 	"\x12PackagePermissions\x12J\n" +
 	"\x06plugin\x18\x01 \x03(\x0e22.skiff.registry.v1alpha1.PackagePermissions.PluginR\x06plugin\"\x1d\n" +
 	"\x06Plugin\x12\n" +
@@ -828,38 +781,37 @@ func file_skiff_registry_v1alpha1_registry_proto_rawDescGZIP() []byte {
 }
 
 var file_skiff_registry_v1alpha1_registry_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_skiff_registry_v1alpha1_registry_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_skiff_registry_v1alpha1_registry_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_skiff_registry_v1alpha1_registry_proto_goTypes = []any{
 	(PackagePermissions_Plugin)(0), // 0: skiff.registry.v1alpha1.PackagePermissions.Plugin
 	(Field_Type)(0),                // 1: skiff.registry.v1alpha1.Field.Type
 	(File_Type)(0),                 // 2: skiff.registry.v1alpha1.File.Type
 	(*Registry)(nil),               // 3: skiff.registry.v1alpha1.Registry
 	(*Package)(nil),                // 4: skiff.registry.v1alpha1.Package
-	(*Plugin)(nil),                 // 5: skiff.registry.v1alpha1.Plugin
-	(*PackagePermissions)(nil),     // 6: skiff.registry.v1alpha1.PackagePermissions
-	(*Schema)(nil),                 // 7: skiff.registry.v1alpha1.Schema
-	(*Field)(nil),                  // 8: skiff.registry.v1alpha1.Field
-	(*File)(nil),                   // 9: skiff.registry.v1alpha1.File
-	(*Field_SubField)(nil),         // 10: skiff.registry.v1alpha1.Field.SubField
-	(*File_Source)(nil),            // 11: skiff.registry.v1alpha1.File.Source
-	(*structpb.Value)(nil),         // 12: google.protobuf.Value
-	(*structpb.ListValue)(nil),     // 13: google.protobuf.ListValue
+	(*PackagePermissions)(nil),     // 5: skiff.registry.v1alpha1.PackagePermissions
+	(*Schema)(nil),                 // 6: skiff.registry.v1alpha1.Schema
+	(*Field)(nil),                  // 7: skiff.registry.v1alpha1.Field
+	(*File)(nil),                   // 8: skiff.registry.v1alpha1.File
+	(*Field_SubField)(nil),         // 9: skiff.registry.v1alpha1.Field.SubField
+	(*File_Source)(nil),            // 10: skiff.registry.v1alpha1.File.Source
+	(*structpb.Value)(nil),         // 11: google.protobuf.Value
+	(*structpb.ListValue)(nil),     // 12: google.protobuf.ListValue
 }
 var file_skiff_registry_v1alpha1_registry_proto_depIdxs = []int32{
 	4,  // 0: skiff.registry.v1alpha1.Registry.packages:type_name -> skiff.registry.v1alpha1.Package
-	9,  // 1: skiff.registry.v1alpha1.Package.files:type_name -> skiff.registry.v1alpha1.File
-	7,  // 2: skiff.registry.v1alpha1.Package.schema:type_name -> skiff.registry.v1alpha1.Schema
-	6,  // 3: skiff.registry.v1alpha1.Package.permissions:type_name -> skiff.registry.v1alpha1.PackagePermissions
+	8,  // 1: skiff.registry.v1alpha1.Package.files:type_name -> skiff.registry.v1alpha1.File
+	6,  // 2: skiff.registry.v1alpha1.Package.schema:type_name -> skiff.registry.v1alpha1.Schema
+	5,  // 3: skiff.registry.v1alpha1.Package.permissions:type_name -> skiff.registry.v1alpha1.PackagePermissions
 	0,  // 4: skiff.registry.v1alpha1.PackagePermissions.plugin:type_name -> skiff.registry.v1alpha1.PackagePermissions.Plugin
-	8,  // 5: skiff.registry.v1alpha1.Schema.fields:type_name -> skiff.registry.v1alpha1.Field
+	7,  // 5: skiff.registry.v1alpha1.Schema.fields:type_name -> skiff.registry.v1alpha1.Field
 	1,  // 6: skiff.registry.v1alpha1.Field.type:type_name -> skiff.registry.v1alpha1.Field.Type
-	10, // 7: skiff.registry.v1alpha1.Field.items:type_name -> skiff.registry.v1alpha1.Field.SubField
-	12, // 8: skiff.registry.v1alpha1.Field.default:type_name -> google.protobuf.Value
-	13, // 9: skiff.registry.v1alpha1.Field.enum:type_name -> google.protobuf.ListValue
+	9,  // 7: skiff.registry.v1alpha1.Field.items:type_name -> skiff.registry.v1alpha1.Field.SubField
+	11, // 8: skiff.registry.v1alpha1.Field.default:type_name -> google.protobuf.Value
+	12, // 9: skiff.registry.v1alpha1.Field.enum:type_name -> google.protobuf.ListValue
 	2,  // 10: skiff.registry.v1alpha1.File.type:type_name -> skiff.registry.v1alpha1.File.Type
-	11, // 11: skiff.registry.v1alpha1.File.source:type_name -> skiff.registry.v1alpha1.File.Source
+	10, // 11: skiff.registry.v1alpha1.File.source:type_name -> skiff.registry.v1alpha1.File.Source
 	1,  // 12: skiff.registry.v1alpha1.Field.SubField.type:type_name -> skiff.registry.v1alpha1.Field.Type
-	13, // 13: skiff.registry.v1alpha1.Field.SubField.enum:type_name -> google.protobuf.ListValue
+	12, // 13: skiff.registry.v1alpha1.Field.SubField.enum:type_name -> google.protobuf.ListValue
 	14, // [14:14] is the sub-list for method output_type
 	14, // [14:14] is the sub-list for method input_type
 	14, // [14:14] is the sub-list for extension type_name
@@ -873,17 +825,17 @@ func file_skiff_registry_v1alpha1_registry_proto_init() {
 		return
 	}
 	file_skiff_registry_v1alpha1_registry_proto_msgTypes[1].OneofWrappers = []any{}
+	file_skiff_registry_v1alpha1_registry_proto_msgTypes[4].OneofWrappers = []any{}
 	file_skiff_registry_v1alpha1_registry_proto_msgTypes[5].OneofWrappers = []any{}
 	file_skiff_registry_v1alpha1_registry_proto_msgTypes[6].OneofWrappers = []any{}
 	file_skiff_registry_v1alpha1_registry_proto_msgTypes[7].OneofWrappers = []any{}
-	file_skiff_registry_v1alpha1_registry_proto_msgTypes[8].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_skiff_registry_v1alpha1_registry_proto_rawDesc), len(file_skiff_registry_v1alpha1_registry_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   9,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

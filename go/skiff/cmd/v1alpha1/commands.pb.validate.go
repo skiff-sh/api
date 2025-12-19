@@ -63,6 +63,35 @@ func (m *AddPackageRequest) validate(all bool) error {
 
 	// no validation rules for Root
 
+	if all {
+		switch v := interface{}(m.GetData()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, AddPackageRequestValidationError{
+					field:  "Data",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, AddPackageRequestValidationError{
+					field:  "Data",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetData()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return AddPackageRequestValidationError{
+				field:  "Data",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if len(errors) > 0 {
 		return AddPackageRequestMultiError(errors)
 	}
@@ -244,6 +273,244 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = AddPackageResponseValidationError{}
+
+// Validate checks the field values on ViewPackagesRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ViewPackagesRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ViewPackagesRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ViewPackagesRequestMultiError, or nil if none found.
+func (m *ViewPackagesRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ViewPackagesRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return ViewPackagesRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ViewPackagesRequestMultiError is an error wrapping multiple validation
+// errors returned by ViewPackagesRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ViewPackagesRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ViewPackagesRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ViewPackagesRequestMultiError) AllErrors() []error { return m }
+
+// ViewPackagesRequestValidationError is the validation error returned by
+// ViewPackagesRequest.Validate if the designated constraints aren't met.
+type ViewPackagesRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ViewPackagesRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ViewPackagesRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ViewPackagesRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ViewPackagesRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ViewPackagesRequestValidationError) ErrorName() string {
+	return "ViewPackagesRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ViewPackagesRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sViewPackagesRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ViewPackagesRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ViewPackagesRequestValidationError{}
+
+// Validate checks the field values on ViewPackagesResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ViewPackagesResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ViewPackagesResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ViewPackagesResponseMultiError, or nil if none found.
+func (m *ViewPackagesResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ViewPackagesResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetPackages() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ViewPackagesResponseValidationError{
+						field:  fmt.Sprintf("Packages[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ViewPackagesResponseValidationError{
+						field:  fmt.Sprintf("Packages[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ViewPackagesResponseValidationError{
+					field:  fmt.Sprintf("Packages[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return ViewPackagesResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ViewPackagesResponseMultiError is an error wrapping multiple validation
+// errors returned by ViewPackagesResponse.ValidateAll() if the designated
+// constraints aren't met.
+type ViewPackagesResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ViewPackagesResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ViewPackagesResponseMultiError) AllErrors() []error { return m }
+
+// ViewPackagesResponseValidationError is the validation error returned by
+// ViewPackagesResponse.Validate if the designated constraints aren't met.
+type ViewPackagesResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ViewPackagesResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ViewPackagesResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ViewPackagesResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ViewPackagesResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ViewPackagesResponseValidationError) ErrorName() string {
+	return "ViewPackagesResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ViewPackagesResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sViewPackagesResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ViewPackagesResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ViewPackagesResponseValidationError{}
 
 // Validate checks the field values on ListPackagesRequest with the rules
 // defined in the proto definition for this message. If any rules are
@@ -482,3 +749,120 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ListPackagesResponseValidationError{}
+
+// Validate checks the field values on ListPackagesResponse_PackagePreview with
+// the rules defined in the proto definition for this message. If any rules
+// are violated, the first error encountered is returned, or nil if there are
+// no violations.
+func (m *ListPackagesResponse_PackagePreview) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListPackagesResponse_PackagePreview
+// with the rules defined in the proto definition for this message. If any
+// rules are violated, the result is a list of violation errors wrapped in
+// ListPackagesResponse_PackagePreviewMultiError, or nil if none found.
+func (m *ListPackagesResponse_PackagePreview) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListPackagesResponse_PackagePreview) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Name
+
+	// no validation rules for Type
+
+	// no validation rules for Registry
+
+	// no validation rules for Path
+
+	if m.Description != nil {
+		// no validation rules for Description
+	}
+
+	if len(errors) > 0 {
+		return ListPackagesResponse_PackagePreviewMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListPackagesResponse_PackagePreviewMultiError is an error wrapping multiple
+// validation errors returned by
+// ListPackagesResponse_PackagePreview.ValidateAll() if the designated
+// constraints aren't met.
+type ListPackagesResponse_PackagePreviewMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListPackagesResponse_PackagePreviewMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListPackagesResponse_PackagePreviewMultiError) AllErrors() []error { return m }
+
+// ListPackagesResponse_PackagePreviewValidationError is the validation error
+// returned by ListPackagesResponse_PackagePreview.Validate if the designated
+// constraints aren't met.
+type ListPackagesResponse_PackagePreviewValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListPackagesResponse_PackagePreviewValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListPackagesResponse_PackagePreviewValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListPackagesResponse_PackagePreviewValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListPackagesResponse_PackagePreviewValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListPackagesResponse_PackagePreviewValidationError) ErrorName() string {
+	return "ListPackagesResponse_PackagePreviewValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListPackagesResponse_PackagePreviewValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListPackagesResponse_PackagePreview.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListPackagesResponse_PackagePreviewValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListPackagesResponse_PackagePreviewValidationError{}
