@@ -20,7 +20,7 @@ message AddPackageRequest {
   // The list of permissions available to plugins that are called within the packages. If none are specified, no permissions are granted to the user's system.
   repeated skiff.registry.v1alpha1.PackagePermissions.Plugin plugin_permissions = 3 [json_name = "plugin_permissions"];
 
-  // The
+  // The data needed by the package. The schema is retrieved via the "view packages" call.
   google.protobuf.Struct data = 4;
 }
 

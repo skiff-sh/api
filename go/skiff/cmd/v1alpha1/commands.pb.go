@@ -34,7 +34,7 @@ type AddPackageRequest struct {
 	Packages []string `protobuf:"bytes,2,rep,name=packages,proto3" json:"packages,omitempty"`
 	// The list of permissions available to plugins that are called within the packages. If none are specified, no permissions are granted to the user's system.
 	PluginPermissions []v1alpha1.PackagePermissions_Plugin `protobuf:"varint,3,rep,packed,name=plugin_permissions,proto3,enum=skiff.registry.v1alpha1.PackagePermissions_Plugin" json:"plugin_permissions,omitempty"`
-	// The
+	// The data needed by the package. The schema is retrieved via the "view packages" call.
 	Data          *structpb.Struct `protobuf:"bytes,4,opt,name=data,proto3" json:"data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
