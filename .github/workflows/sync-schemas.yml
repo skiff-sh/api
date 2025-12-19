@@ -28,11 +28,8 @@ jobs:
 
       - name: Sync jsonschema
         run: |
-          ls -lah
-          
-          rsync -av --delete \
-            api/jsonschema/ \
-            skiff/pkg/embeded/jsonschema/
+          rm -rf skiff/pkg/embedded/jsonschema
+          cp -a api/jsonschema/. skiff/pkg/embedded/jsonschema/
 
       - name: Commit and push changes
         working-directory: skiff
