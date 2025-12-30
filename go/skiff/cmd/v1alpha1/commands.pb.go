@@ -30,12 +30,12 @@ type AddPackageRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// An absolute filepath to the project root. This is used as the root for all plugin file reads and the base reference path for all file outputs.
 	ProjectRoot string `protobuf:"bytes,1,opt,name=project_root,proto3" json:"project_root,omitempty"`
-	// The list of file paths to packages or http(s) URLs. HTTP(s) URLs must start with "http(s)://", otherwise, it's treated as a filepath.
-	Packages []string `protobuf:"bytes,2,rep,name=packages,proto3" json:"packages,omitempty"`
-	// The list of permissions available to plugins that are called within the packages. If none are specified, no permissions are granted to the user's system.
+	// The file path or http(s) URLs to the package. HTTP(s) URLs must start with "http(s)://", otherwise, it's treated as a filepath.
+	Package string `protobuf:"bytes,2,opt,name=package,proto3" json:"package,omitempty"`
+	// The list of permissions available to plugins that are called within the package. If none are specified, no permissions are granted to the user's system.
 	PluginPermissions []v1alpha1.PackagePermissions_Plugin `protobuf:"varint,3,rep,packed,name=plugin_permissions,proto3,enum=skiff.registry.v1alpha1.PackagePermissions_Plugin" json:"plugin_permissions,omitempty"`
-	// The data needed by the package. The schema is retrieved via the "view packages" call.
-	Data          *structpb.Struct `protobuf:"bytes,4,opt,name=data,proto3" json:"data,omitempty"`
+	// The data needed by the package. Should be a simple map of the field name to the value.
+	Data          map[string]*structpb.Value `protobuf:"bytes,4,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -77,11 +77,11 @@ func (x *AddPackageRequest) GetProjectRoot() string {
 	return ""
 }
 
-func (x *AddPackageRequest) GetPackages() []string {
+func (x *AddPackageRequest) GetPackage() string {
 	if x != nil {
-		return x.Packages
+		return x.Package
 	}
-	return nil
+	return ""
 }
 
 func (x *AddPackageRequest) GetPluginPermissions() []v1alpha1.PackagePermissions_Plugin {
@@ -91,7 +91,7 @@ func (x *AddPackageRequest) GetPluginPermissions() []v1alpha1.PackagePermissions
 	return nil
 }
 
-func (x *AddPackageRequest) GetData() *structpb.Struct {
+func (x *AddPackageRequest) GetData() map[string]*structpb.Value {
 	if x != nil {
 		return x.Data
 	}
@@ -256,7 +256,7 @@ type ListPackagesResponse_PackagePreview struct {
 
 func (x *ListPackagesResponse_PackagePreview) Reset() {
 	*x = ListPackagesResponse_PackagePreview{}
-	mi := &file_skiff_cmd_v1alpha1_commands_proto_msgTypes[4]
+	mi := &file_skiff_cmd_v1alpha1_commands_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -268,7 +268,7 @@ func (x *ListPackagesResponse_PackagePreview) String() string {
 func (*ListPackagesResponse_PackagePreview) ProtoMessage() {}
 
 func (x *ListPackagesResponse_PackagePreview) ProtoReflect() protoreflect.Message {
-	mi := &file_skiff_cmd_v1alpha1_commands_proto_msgTypes[4]
+	mi := &file_skiff_cmd_v1alpha1_commands_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -330,12 +330,15 @@ var File_skiff_cmd_v1alpha1_commands_proto protoreflect.FileDescriptor
 
 const file_skiff_cmd_v1alpha1_commands_proto_rawDesc = "" +
 	"\n" +
-	"!skiff/cmd/v1alpha1/commands.proto\x12\x12skiff.cmd.v1alpha1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a&skiff/registry/v1alpha1/registry.proto\"\xf7\x01\n" +
+	"!skiff/cmd/v1alpha1/commands.proto\x12\x12skiff.cmd.v1alpha1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a&skiff/registry/v1alpha1/registry.proto\"\xdd\x02\n" +
 	"\x11AddPackageRequest\x12+\n" +
-	"\fproject_root\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\fproject_root\x12$\n" +
-	"\bpackages\x18\x02 \x03(\tB\b\xbaH\x05\x92\x01\x02\b\x01R\bpackages\x12b\n" +
-	"\x12plugin_permissions\x18\x03 \x03(\x0e22.skiff.registry.v1alpha1.PackagePermissions.PluginR\x12plugin_permissions\x12+\n" +
-	"\x04data\x18\x04 \x01(\v2\x17.google.protobuf.StructR\x04data\":\n" +
+	"\fproject_root\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\fproject_root\x12!\n" +
+	"\apackage\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\apackage\x12b\n" +
+	"\x12plugin_permissions\x18\x03 \x03(\x0e22.skiff.registry.v1alpha1.PackagePermissions.PluginR\x12plugin_permissions\x12C\n" +
+	"\x04data\x18\x04 \x03(\v2/.skiff.cmd.v1alpha1.AddPackageRequest.DataEntryR\x04data\x1aO\n" +
+	"\tDataEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
+	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\":\n" +
 	"\x12AddPackageResponse\x12$\n" +
 	"\runified_diffs\x18\x01 \x03(\tR\runified_diffs\"5\n" +
 	"\x13ListPackagesRequest\x12\x1e\n" +
@@ -366,27 +369,29 @@ func file_skiff_cmd_v1alpha1_commands_proto_rawDescGZIP() []byte {
 	return file_skiff_cmd_v1alpha1_commands_proto_rawDescData
 }
 
-var file_skiff_cmd_v1alpha1_commands_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_skiff_cmd_v1alpha1_commands_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_skiff_cmd_v1alpha1_commands_proto_goTypes = []any{
-	(*AddPackageRequest)(nil),                   // 0: skiff.cmd.v1alpha1.AddPackageRequest
-	(*AddPackageResponse)(nil),                  // 1: skiff.cmd.v1alpha1.AddPackageResponse
-	(*ListPackagesRequest)(nil),                 // 2: skiff.cmd.v1alpha1.ListPackagesRequest
-	(*ListPackagesResponse)(nil),                // 3: skiff.cmd.v1alpha1.ListPackagesResponse
-	(*ListPackagesResponse_PackagePreview)(nil), // 4: skiff.cmd.v1alpha1.ListPackagesResponse.PackagePreview
-	(v1alpha1.PackagePermissions_Plugin)(0),     // 5: skiff.registry.v1alpha1.PackagePermissions.Plugin
-	(*structpb.Struct)(nil),                     // 6: google.protobuf.Struct
-	(v1alpha1.File_Type)(0),                     // 7: skiff.registry.v1alpha1.File.Type
+	(*AddPackageRequest)(nil),    // 0: skiff.cmd.v1alpha1.AddPackageRequest
+	(*AddPackageResponse)(nil),   // 1: skiff.cmd.v1alpha1.AddPackageResponse
+	(*ListPackagesRequest)(nil),  // 2: skiff.cmd.v1alpha1.ListPackagesRequest
+	(*ListPackagesResponse)(nil), // 3: skiff.cmd.v1alpha1.ListPackagesResponse
+	nil,                          // 4: skiff.cmd.v1alpha1.AddPackageRequest.DataEntry
+	(*ListPackagesResponse_PackagePreview)(nil), // 5: skiff.cmd.v1alpha1.ListPackagesResponse.PackagePreview
+	(v1alpha1.PackagePermissions_Plugin)(0),     // 6: skiff.registry.v1alpha1.PackagePermissions.Plugin
+	(*structpb.Value)(nil),                      // 7: google.protobuf.Value
+	(v1alpha1.File_Type)(0),                     // 8: skiff.registry.v1alpha1.File.Type
 }
 var file_skiff_cmd_v1alpha1_commands_proto_depIdxs = []int32{
-	5, // 0: skiff.cmd.v1alpha1.AddPackageRequest.plugin_permissions:type_name -> skiff.registry.v1alpha1.PackagePermissions.Plugin
-	6, // 1: skiff.cmd.v1alpha1.AddPackageRequest.data:type_name -> google.protobuf.Struct
-	4, // 2: skiff.cmd.v1alpha1.ListPackagesResponse.packages:type_name -> skiff.cmd.v1alpha1.ListPackagesResponse.PackagePreview
-	7, // 3: skiff.cmd.v1alpha1.ListPackagesResponse.PackagePreview.type:type_name -> skiff.registry.v1alpha1.File.Type
-	4, // [4:4] is the sub-list for method output_type
-	4, // [4:4] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	6, // 0: skiff.cmd.v1alpha1.AddPackageRequest.plugin_permissions:type_name -> skiff.registry.v1alpha1.PackagePermissions.Plugin
+	4, // 1: skiff.cmd.v1alpha1.AddPackageRequest.data:type_name -> skiff.cmd.v1alpha1.AddPackageRequest.DataEntry
+	5, // 2: skiff.cmd.v1alpha1.ListPackagesResponse.packages:type_name -> skiff.cmd.v1alpha1.ListPackagesResponse.PackagePreview
+	7, // 3: skiff.cmd.v1alpha1.AddPackageRequest.DataEntry.value:type_name -> google.protobuf.Value
+	8, // 4: skiff.cmd.v1alpha1.ListPackagesResponse.PackagePreview.type:type_name -> skiff.registry.v1alpha1.File.Type
+	5, // [5:5] is the sub-list for method output_type
+	5, // [5:5] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_skiff_cmd_v1alpha1_commands_proto_init() }
@@ -394,14 +399,14 @@ func file_skiff_cmd_v1alpha1_commands_proto_init() {
 	if File_skiff_cmd_v1alpha1_commands_proto != nil {
 		return
 	}
-	file_skiff_cmd_v1alpha1_commands_proto_msgTypes[4].OneofWrappers = []any{}
+	file_skiff_cmd_v1alpha1_commands_proto_msgTypes[5].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_skiff_cmd_v1alpha1_commands_proto_rawDesc), len(file_skiff_cmd_v1alpha1_commands_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
