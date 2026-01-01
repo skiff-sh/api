@@ -32,10 +32,8 @@ type AddPackageRequest struct {
 	ProjectRoot string `protobuf:"bytes,1,opt,name=project_root,proto3" json:"project_root,omitempty"`
 	// The file path or http(s) URLs to the package. HTTP(s) URLs must start with "http(s)://", otherwise, it's treated as a filepath.
 	Package string `protobuf:"bytes,2,opt,name=package,proto3" json:"package,omitempty"`
-	// The list of permissions available to plugins that are called within the package. If none are specified, no permissions are granted to the user's system.
-	PluginPermissions []v1alpha1.PackagePermissions_Plugin `protobuf:"varint,3,rep,packed,name=plugin_permissions,proto3,enum=skiff.registry.v1alpha1.PackagePermissions_Plugin" json:"plugin_permissions,omitempty"`
 	// The data needed by the package. Should be a simple map of the field name to the value.
-	Data          map[string]*structpb.Value `protobuf:"bytes,4,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Data          map[string]*structpb.Value `protobuf:"bytes,3,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -82,13 +80,6 @@ func (x *AddPackageRequest) GetPackage() string {
 		return x.Package
 	}
 	return ""
-}
-
-func (x *AddPackageRequest) GetPluginPermissions() []v1alpha1.PackagePermissions_Plugin {
-	if x != nil {
-		return x.PluginPermissions
-	}
-	return nil
 }
 
 func (x *AddPackageRequest) GetData() map[string]*structpb.Value {
@@ -145,6 +136,97 @@ func (x *AddPackageResponse) GetUnifiedDiffs() []string {
 	return nil
 }
 
+// Get detailed information about a set of packages. Includes the contents of the files that the packages would add if add package was called.
+type ViewPackagesRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// The URLs or local file paths to packages e.g. ./skiff/public/r/create-http-route.json
+	Packages      []string `protobuf:"bytes,1,rep,name=packages,proto3" json:"packages,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ViewPackagesRequest) Reset() {
+	*x = ViewPackagesRequest{}
+	mi := &file_skiff_cmd_v1alpha1_commands_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ViewPackagesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ViewPackagesRequest) ProtoMessage() {}
+
+func (x *ViewPackagesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_skiff_cmd_v1alpha1_commands_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ViewPackagesRequest.ProtoReflect.Descriptor instead.
+func (*ViewPackagesRequest) Descriptor() ([]byte, []int) {
+	return file_skiff_cmd_v1alpha1_commands_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *ViewPackagesRequest) GetPackages() []string {
+	if x != nil {
+		return x.Packages
+	}
+	return nil
+}
+
+type ViewPackagesResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Returns the entirety of the contents of the package. If the package contains a plugin file, the contents of the file are not returned as they are just WASM bytes.
+	Packages      []*v1alpha1.Package `protobuf:"bytes,1,rep,name=packages,proto3" json:"packages,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ViewPackagesResponse) Reset() {
+	*x = ViewPackagesResponse{}
+	mi := &file_skiff_cmd_v1alpha1_commands_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ViewPackagesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ViewPackagesResponse) ProtoMessage() {}
+
+func (x *ViewPackagesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_skiff_cmd_v1alpha1_commands_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ViewPackagesResponse.ProtoReflect.Descriptor instead.
+func (*ViewPackagesResponse) Descriptor() ([]byte, []int) {
+	return file_skiff_cmd_v1alpha1_commands_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *ViewPackagesResponse) GetPackages() []*v1alpha1.Package {
+	if x != nil {
+		return x.Packages
+	}
+	return nil
+}
+
 // List all packages within a set of registries. These packages do not include the contents of the files. To get more details about a package use the view package
 // call.
 type ListPackagesRequest struct {
@@ -157,7 +239,7 @@ type ListPackagesRequest struct {
 
 func (x *ListPackagesRequest) Reset() {
 	*x = ListPackagesRequest{}
-	mi := &file_skiff_cmd_v1alpha1_commands_proto_msgTypes[2]
+	mi := &file_skiff_cmd_v1alpha1_commands_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -169,7 +251,7 @@ func (x *ListPackagesRequest) String() string {
 func (*ListPackagesRequest) ProtoMessage() {}
 
 func (x *ListPackagesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_skiff_cmd_v1alpha1_commands_proto_msgTypes[2]
+	mi := &file_skiff_cmd_v1alpha1_commands_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -182,7 +264,7 @@ func (x *ListPackagesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListPackagesRequest.ProtoReflect.Descriptor instead.
 func (*ListPackagesRequest) Descriptor() ([]byte, []int) {
-	return file_skiff_cmd_v1alpha1_commands_proto_rawDescGZIP(), []int{2}
+	return file_skiff_cmd_v1alpha1_commands_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *ListPackagesRequest) GetRegistries() []string {
@@ -201,7 +283,7 @@ type ListPackagesResponse struct {
 
 func (x *ListPackagesResponse) Reset() {
 	*x = ListPackagesResponse{}
-	mi := &file_skiff_cmd_v1alpha1_commands_proto_msgTypes[3]
+	mi := &file_skiff_cmd_v1alpha1_commands_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -213,7 +295,7 @@ func (x *ListPackagesResponse) String() string {
 func (*ListPackagesResponse) ProtoMessage() {}
 
 func (x *ListPackagesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_skiff_cmd_v1alpha1_commands_proto_msgTypes[3]
+	mi := &file_skiff_cmd_v1alpha1_commands_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -226,7 +308,7 @@ func (x *ListPackagesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListPackagesResponse.ProtoReflect.Descriptor instead.
 func (*ListPackagesResponse) Descriptor() ([]byte, []int) {
-	return file_skiff_cmd_v1alpha1_commands_proto_rawDescGZIP(), []int{3}
+	return file_skiff_cmd_v1alpha1_commands_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *ListPackagesResponse) GetPackages() []*ListPackagesResponse_PackagePreview {
@@ -256,7 +338,7 @@ type ListPackagesResponse_PackagePreview struct {
 
 func (x *ListPackagesResponse_PackagePreview) Reset() {
 	*x = ListPackagesResponse_PackagePreview{}
-	mi := &file_skiff_cmd_v1alpha1_commands_proto_msgTypes[5]
+	mi := &file_skiff_cmd_v1alpha1_commands_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -268,7 +350,7 @@ func (x *ListPackagesResponse_PackagePreview) String() string {
 func (*ListPackagesResponse_PackagePreview) ProtoMessage() {}
 
 func (x *ListPackagesResponse_PackagePreview) ProtoReflect() protoreflect.Message {
-	mi := &file_skiff_cmd_v1alpha1_commands_proto_msgTypes[5]
+	mi := &file_skiff_cmd_v1alpha1_commands_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -281,7 +363,7 @@ func (x *ListPackagesResponse_PackagePreview) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use ListPackagesResponse_PackagePreview.ProtoReflect.Descriptor instead.
 func (*ListPackagesResponse_PackagePreview) Descriptor() ([]byte, []int) {
-	return file_skiff_cmd_v1alpha1_commands_proto_rawDescGZIP(), []int{3, 0}
+	return file_skiff_cmd_v1alpha1_commands_proto_rawDescGZIP(), []int{5, 0}
 }
 
 func (x *ListPackagesResponse_PackagePreview) GetName() string {
@@ -330,17 +412,20 @@ var File_skiff_cmd_v1alpha1_commands_proto protoreflect.FileDescriptor
 
 const file_skiff_cmd_v1alpha1_commands_proto_rawDesc = "" +
 	"\n" +
-	"!skiff/cmd/v1alpha1/commands.proto\x12\x12skiff.cmd.v1alpha1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a&skiff/registry/v1alpha1/registry.proto\"\xdd\x02\n" +
+	"!skiff/cmd/v1alpha1/commands.proto\x12\x12skiff.cmd.v1alpha1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a&skiff/registry/v1alpha1/registry.proto\"\xf9\x01\n" +
 	"\x11AddPackageRequest\x12+\n" +
 	"\fproject_root\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\fproject_root\x12!\n" +
-	"\apackage\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\apackage\x12b\n" +
-	"\x12plugin_permissions\x18\x03 \x03(\x0e22.skiff.registry.v1alpha1.PackagePermissions.PluginR\x12plugin_permissions\x12C\n" +
-	"\x04data\x18\x04 \x03(\v2/.skiff.cmd.v1alpha1.AddPackageRequest.DataEntryR\x04data\x1aO\n" +
+	"\apackage\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\apackage\x12C\n" +
+	"\x04data\x18\x03 \x03(\v2/.skiff.cmd.v1alpha1.AddPackageRequest.DataEntryR\x04data\x1aO\n" +
 	"\tDataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
 	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\":\n" +
 	"\x12AddPackageResponse\x12$\n" +
-	"\runified_diffs\x18\x01 \x03(\tR\runified_diffs\"5\n" +
+	"\runified_diffs\x18\x01 \x03(\tR\runified_diffs\"1\n" +
+	"\x13ViewPackagesRequest\x12\x1a\n" +
+	"\bpackages\x18\x01 \x03(\tR\bpackages\"T\n" +
+	"\x14ViewPackagesResponse\x12<\n" +
+	"\bpackages\x18\x01 \x03(\v2 .skiff.registry.v1alpha1.PackageR\bpackages\"5\n" +
 	"\x13ListPackagesRequest\x12\x1e\n" +
 	"\n" +
 	"registries\x18\x01 \x03(\tR\n" +
@@ -369,29 +454,31 @@ func file_skiff_cmd_v1alpha1_commands_proto_rawDescGZIP() []byte {
 	return file_skiff_cmd_v1alpha1_commands_proto_rawDescData
 }
 
-var file_skiff_cmd_v1alpha1_commands_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_skiff_cmd_v1alpha1_commands_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_skiff_cmd_v1alpha1_commands_proto_goTypes = []any{
-	(*AddPackageRequest)(nil),    // 0: skiff.cmd.v1alpha1.AddPackageRequest
-	(*AddPackageResponse)(nil),   // 1: skiff.cmd.v1alpha1.AddPackageResponse
-	(*ListPackagesRequest)(nil),  // 2: skiff.cmd.v1alpha1.ListPackagesRequest
-	(*ListPackagesResponse)(nil), // 3: skiff.cmd.v1alpha1.ListPackagesResponse
-	nil,                          // 4: skiff.cmd.v1alpha1.AddPackageRequest.DataEntry
-	(*ListPackagesResponse_PackagePreview)(nil), // 5: skiff.cmd.v1alpha1.ListPackagesResponse.PackagePreview
-	(v1alpha1.PackagePermissions_Plugin)(0),     // 6: skiff.registry.v1alpha1.PackagePermissions.Plugin
-	(*structpb.Value)(nil),                      // 7: google.protobuf.Value
-	(v1alpha1.File_Type)(0),                     // 8: skiff.registry.v1alpha1.File.Type
+	(*AddPackageRequest)(nil),                   // 0: skiff.cmd.v1alpha1.AddPackageRequest
+	(*AddPackageResponse)(nil),                  // 1: skiff.cmd.v1alpha1.AddPackageResponse
+	(*ViewPackagesRequest)(nil),                 // 2: skiff.cmd.v1alpha1.ViewPackagesRequest
+	(*ViewPackagesResponse)(nil),                // 3: skiff.cmd.v1alpha1.ViewPackagesResponse
+	(*ListPackagesRequest)(nil),                 // 4: skiff.cmd.v1alpha1.ListPackagesRequest
+	(*ListPackagesResponse)(nil),                // 5: skiff.cmd.v1alpha1.ListPackagesResponse
+	nil,                                         // 6: skiff.cmd.v1alpha1.AddPackageRequest.DataEntry
+	(*ListPackagesResponse_PackagePreview)(nil), // 7: skiff.cmd.v1alpha1.ListPackagesResponse.PackagePreview
+	(*v1alpha1.Package)(nil),                    // 8: skiff.registry.v1alpha1.Package
+	(*structpb.Value)(nil),                      // 9: google.protobuf.Value
+	(v1alpha1.File_Type)(0),                     // 10: skiff.registry.v1alpha1.File.Type
 }
 var file_skiff_cmd_v1alpha1_commands_proto_depIdxs = []int32{
-	6, // 0: skiff.cmd.v1alpha1.AddPackageRequest.plugin_permissions:type_name -> skiff.registry.v1alpha1.PackagePermissions.Plugin
-	4, // 1: skiff.cmd.v1alpha1.AddPackageRequest.data:type_name -> skiff.cmd.v1alpha1.AddPackageRequest.DataEntry
-	5, // 2: skiff.cmd.v1alpha1.ListPackagesResponse.packages:type_name -> skiff.cmd.v1alpha1.ListPackagesResponse.PackagePreview
-	7, // 3: skiff.cmd.v1alpha1.AddPackageRequest.DataEntry.value:type_name -> google.protobuf.Value
-	8, // 4: skiff.cmd.v1alpha1.ListPackagesResponse.PackagePreview.type:type_name -> skiff.registry.v1alpha1.File.Type
-	5, // [5:5] is the sub-list for method output_type
-	5, // [5:5] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	6,  // 0: skiff.cmd.v1alpha1.AddPackageRequest.data:type_name -> skiff.cmd.v1alpha1.AddPackageRequest.DataEntry
+	8,  // 1: skiff.cmd.v1alpha1.ViewPackagesResponse.packages:type_name -> skiff.registry.v1alpha1.Package
+	7,  // 2: skiff.cmd.v1alpha1.ListPackagesResponse.packages:type_name -> skiff.cmd.v1alpha1.ListPackagesResponse.PackagePreview
+	9,  // 3: skiff.cmd.v1alpha1.AddPackageRequest.DataEntry.value:type_name -> google.protobuf.Value
+	10, // 4: skiff.cmd.v1alpha1.ListPackagesResponse.PackagePreview.type:type_name -> skiff.registry.v1alpha1.File.Type
+	5,  // [5:5] is the sub-list for method output_type
+	5,  // [5:5] is the sub-list for method input_type
+	5,  // [5:5] is the sub-list for extension type_name
+	5,  // [5:5] is the sub-list for extension extendee
+	0,  // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_skiff_cmd_v1alpha1_commands_proto_init() }
@@ -399,14 +486,14 @@ func file_skiff_cmd_v1alpha1_commands_proto_init() {
 	if File_skiff_cmd_v1alpha1_commands_proto != nil {
 		return
 	}
-	file_skiff_cmd_v1alpha1_commands_proto_msgTypes[5].OneofWrappers = []any{}
+	file_skiff_cmd_v1alpha1_commands_proto_msgTypes[7].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_skiff_cmd_v1alpha1_commands_proto_rawDesc), len(file_skiff_cmd_v1alpha1_commands_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

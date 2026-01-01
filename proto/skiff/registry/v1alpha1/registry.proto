@@ -26,24 +26,6 @@ message Package {
 
   // If a field does not have a default, it is marked as required.
   optional Schema schema = 4;
-
-  // Any needed permissions for your package to function.
-  optional PackagePermissions permissions = 5;
-}
-
-message PackagePermissions {
-  // buf:lint:ignore ENUM_VALUE_UPPER_SNAKE_CASE
-  // buf:lint:ignore ENUM_VALUE_PREFIX
-  // buf:lint:ignore ENUM_ZERO_VALUE_SUFFIX
-  enum Plugin {
-    // Grant RO access to the user's current working directory.
-    cwd_ro = 0;
-    // Grant access to all available permissions.
-    all = 1;
-  }
-
-  // Permissions for all plugins in the package.
-  repeated Plugin plugin = 1;
 }
 
 message Schema {
