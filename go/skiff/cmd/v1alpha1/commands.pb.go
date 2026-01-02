@@ -320,8 +320,8 @@ func (x *ListPackagesResponse) GetPackages() []*ListPackagesResponse_PackagePrev
 
 type ListPackagesResponse_PackagePreview struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// The name of the file with the extension.
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// The name of the package.
+	Package string `protobuf:"bytes,1,opt,name=package,proto3" json:"package,omitempty"`
 	// The type of the file.
 	Type v1alpha1.File_Type `protobuf:"varint,2,opt,name=type,proto3,enum=skiff.registry.v1alpha1.File_Type" json:"type,omitempty"`
 	// The registry that this package belongs to.
@@ -366,9 +366,9 @@ func (*ListPackagesResponse_PackagePreview) Descriptor() ([]byte, []int) {
 	return file_skiff_cmd_v1alpha1_commands_proto_rawDescGZIP(), []int{5, 0}
 }
 
-func (x *ListPackagesResponse_PackagePreview) GetName() string {
+func (x *ListPackagesResponse_PackagePreview) GetPackage() string {
 	if x != nil {
-		return x.Name
+		return x.Package
 	}
 	return ""
 }
@@ -429,11 +429,11 @@ const file_skiff_cmd_v1alpha1_commands_proto_rawDesc = "" +
 	"\x13ListPackagesRequest\x12\x1e\n" +
 	"\n" +
 	"registries\x18\x01 \x03(\tR\n" +
-	"registries\"\xd3\x02\n" +
+	"registries\"\xd9\x02\n" +
 	"\x14ListPackagesResponse\x12S\n" +
-	"\bpackages\x18\x01 \x03(\v27.skiff.cmd.v1alpha1.ListPackagesResponse.PackagePreviewR\bpackages\x1a\xe5\x01\n" +
-	"\x0ePackagePreview\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\x126\n" +
+	"\bpackages\x18\x01 \x03(\v27.skiff.cmd.v1alpha1.ListPackagesResponse.PackagePreviewR\bpackages\x1a\xeb\x01\n" +
+	"\x0ePackagePreview\x12\x18\n" +
+	"\apackage\x18\x01 \x01(\tR\apackage\x126\n" +
 	"\x04type\x18\x02 \x01(\x0e2\".skiff.registry.v1alpha1.File.TypeR\x04type\x12\x1a\n" +
 	"\bregistry\x18\x03 \x01(\tR\bregistry\x12%\n" +
 	"\vdescription\x18\x04 \x01(\tH\x00R\vdescription\x88\x01\x01\x12\x12\n" +

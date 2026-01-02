@@ -792,7 +792,7 @@ func (m *ListPackagesResponse_PackagePreview) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Name
+	// no validation rules for Package
 
 	// no validation rules for Type
 

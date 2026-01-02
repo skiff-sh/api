@@ -51,8 +51,8 @@ message ListPackagesRequest {
 
 message ListPackagesResponse {
   message PackagePreview {
-    // The name of the file with the extension.
-    string name = 1;
+    // The name of the package.
+    string package = 1;
 
     // The type of the file.
     skiff.registry.v1alpha1.File.Type type = 2;
