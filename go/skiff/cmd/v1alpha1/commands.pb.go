@@ -321,17 +321,15 @@ func (x *ListPackagesResponse) GetPackages() []*ListPackagesResponse_PackagePrev
 type ListPackagesResponse_PackagePreview struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The name of the package.
-	Package string `protobuf:"bytes,1,opt,name=package,proto3" json:"package,omitempty"`
-	// The type of the file.
-	Type v1alpha1.File_Type `protobuf:"varint,2,opt,name=type,proto3,enum=skiff.registry.v1alpha1.File_Type" json:"type,omitempty"`
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// The registry that this package belongs to.
-	Registry string `protobuf:"bytes,3,opt,name=registry,proto3" json:"registry,omitempty"`
+	Registry string `protobuf:"bytes,2,opt,name=registry,proto3" json:"registry,omitempty"`
 	// A short description of the package.
-	Description *string `protobuf:"bytes,4,opt,name=description,proto3,oneof" json:"description,omitempty"`
+	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// Either the http(s) URL or the local file path to add/view the package.
-	Path string `protobuf:"bytes,5,opt,name=path,proto3" json:"path,omitempty"`
+	Path string `protobuf:"bytes,4,opt,name=path,proto3" json:"path,omitempty"`
 	// The schema for the data required to add this package.
-	JsonSchema    string `protobuf:"bytes,6,opt,name=json_schema,proto3" json:"json_schema,omitempty"`
+	JsonSchema    string `protobuf:"bytes,5,opt,name=json_schema,proto3" json:"json_schema,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -366,18 +364,11 @@ func (*ListPackagesResponse_PackagePreview) Descriptor() ([]byte, []int) {
 	return file_skiff_cmd_v1alpha1_commands_proto_rawDescGZIP(), []int{5, 0}
 }
 
-func (x *ListPackagesResponse_PackagePreview) GetPackage() string {
+func (x *ListPackagesResponse_PackagePreview) GetName() string {
 	if x != nil {
-		return x.Package
+		return x.Name
 	}
 	return ""
-}
-
-func (x *ListPackagesResponse_PackagePreview) GetType() v1alpha1.File_Type {
-	if x != nil {
-		return x.Type
-	}
-	return v1alpha1.File_Type(0)
 }
 
 func (x *ListPackagesResponse_PackagePreview) GetRegistry() string {
@@ -388,8 +379,8 @@ func (x *ListPackagesResponse_PackagePreview) GetRegistry() string {
 }
 
 func (x *ListPackagesResponse_PackagePreview) GetDescription() string {
-	if x != nil && x.Description != nil {
-		return *x.Description
+	if x != nil {
+		return x.Description
 	}
 	return ""
 }
@@ -429,17 +420,15 @@ const file_skiff_cmd_v1alpha1_commands_proto_rawDesc = "" +
 	"\x13ListPackagesRequest\x12\x1e\n" +
 	"\n" +
 	"registries\x18\x01 \x03(\tR\n" +
-	"registries\"\xd9\x02\n" +
+	"registries\"\x86\x02\n" +
 	"\x14ListPackagesResponse\x12S\n" +
-	"\bpackages\x18\x01 \x03(\v27.skiff.cmd.v1alpha1.ListPackagesResponse.PackagePreviewR\bpackages\x1a\xeb\x01\n" +
-	"\x0ePackagePreview\x12\x18\n" +
-	"\apackage\x18\x01 \x01(\tR\apackage\x126\n" +
-	"\x04type\x18\x02 \x01(\x0e2\".skiff.registry.v1alpha1.File.TypeR\x04type\x12\x1a\n" +
-	"\bregistry\x18\x03 \x01(\tR\bregistry\x12%\n" +
-	"\vdescription\x18\x04 \x01(\tH\x00R\vdescription\x88\x01\x01\x12\x12\n" +
-	"\x04path\x18\x05 \x01(\tR\x04path\x12 \n" +
-	"\vjson_schema\x18\x06 \x01(\tR\vjson_schemaB\x0e\n" +
-	"\f_descriptionB\xc0\x01\n" +
+	"\bpackages\x18\x01 \x03(\v27.skiff.cmd.v1alpha1.ListPackagesResponse.PackagePreviewR\bpackages\x1a\x98\x01\n" +
+	"\x0ePackagePreview\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1a\n" +
+	"\bregistry\x18\x02 \x01(\tR\bregistry\x12 \n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\x12\x12\n" +
+	"\x04path\x18\x04 \x01(\tR\x04path\x12 \n" +
+	"\vjson_schema\x18\x05 \x01(\tR\vjson_schemaB\xc0\x01\n" +
 	"\x16com.skiff.cmd.v1alpha1B\rCommandsProtoP\x01Z-github.com/skiff-sh/api/go/skiff/cmd/v1alpha1\xa2\x02\x03SCX\xaa\x02\x12Skiff.Cmd.V1alpha1\xca\x02\x12Skiff\\Cmd\\V1alpha1\xe2\x02\x1eSkiff\\Cmd\\V1alpha1\\GPBMetadata\xea\x02\x14Skiff::Cmd::V1alpha1b\x06proto3"
 
 var (
@@ -466,19 +455,17 @@ var file_skiff_cmd_v1alpha1_commands_proto_goTypes = []any{
 	(*ListPackagesResponse_PackagePreview)(nil), // 7: skiff.cmd.v1alpha1.ListPackagesResponse.PackagePreview
 	(*v1alpha1.Package)(nil),                    // 8: skiff.registry.v1alpha1.Package
 	(*structpb.Value)(nil),                      // 9: google.protobuf.Value
-	(v1alpha1.File_Type)(0),                     // 10: skiff.registry.v1alpha1.File.Type
 }
 var file_skiff_cmd_v1alpha1_commands_proto_depIdxs = []int32{
-	6,  // 0: skiff.cmd.v1alpha1.AddPackageRequest.data:type_name -> skiff.cmd.v1alpha1.AddPackageRequest.DataEntry
-	8,  // 1: skiff.cmd.v1alpha1.ViewPackagesResponse.packages:type_name -> skiff.registry.v1alpha1.Package
-	7,  // 2: skiff.cmd.v1alpha1.ListPackagesResponse.packages:type_name -> skiff.cmd.v1alpha1.ListPackagesResponse.PackagePreview
-	9,  // 3: skiff.cmd.v1alpha1.AddPackageRequest.DataEntry.value:type_name -> google.protobuf.Value
-	10, // 4: skiff.cmd.v1alpha1.ListPackagesResponse.PackagePreview.type:type_name -> skiff.registry.v1alpha1.File.Type
-	5,  // [5:5] is the sub-list for method output_type
-	5,  // [5:5] is the sub-list for method input_type
-	5,  // [5:5] is the sub-list for extension type_name
-	5,  // [5:5] is the sub-list for extension extendee
-	0,  // [0:5] is the sub-list for field type_name
+	6, // 0: skiff.cmd.v1alpha1.AddPackageRequest.data:type_name -> skiff.cmd.v1alpha1.AddPackageRequest.DataEntry
+	8, // 1: skiff.cmd.v1alpha1.ViewPackagesResponse.packages:type_name -> skiff.registry.v1alpha1.Package
+	7, // 2: skiff.cmd.v1alpha1.ListPackagesResponse.packages:type_name -> skiff.cmd.v1alpha1.ListPackagesResponse.PackagePreview
+	9, // 3: skiff.cmd.v1alpha1.AddPackageRequest.DataEntry.value:type_name -> google.protobuf.Value
+	4, // [4:4] is the sub-list for method output_type
+	4, // [4:4] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_skiff_cmd_v1alpha1_commands_proto_init() }
@@ -486,7 +473,6 @@ func file_skiff_cmd_v1alpha1_commands_proto_init() {
 	if File_skiff_cmd_v1alpha1_commands_proto != nil {
 		return
 	}
-	file_skiff_cmd_v1alpha1_commands_proto_msgTypes[7].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

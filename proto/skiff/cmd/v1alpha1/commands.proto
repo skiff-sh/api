@@ -52,22 +52,19 @@ message ListPackagesRequest {
 message ListPackagesResponse {
   message PackagePreview {
     // The name of the package.
-    string package = 1;
-
-    // The type of the file.
-    skiff.registry.v1alpha1.File.Type type = 2;
+    string name = 1;
 
     // The registry that this package belongs to.
-    string registry = 3;
+    string registry = 2;
 
     // A short description of the package.
-    optional string description = 4;
+    string description = 3;
 
     // Either the http(s) URL or the local file path to add/view the package.
-    string path = 5;
+    string path = 4;
 
     // The schema for the data required to add this package.
-    string json_schema = 6 [json_name = "json_schema"];
+    string json_schema = 5 [json_name = "json_schema"];
   }
 
   repeated PackagePreview packages = 1;

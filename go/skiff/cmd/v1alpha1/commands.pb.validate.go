@@ -17,8 +17,6 @@ import (
 	"unicode/utf8"
 
 	"google.golang.org/protobuf/types/known/anypb"
-
-	v1alpha1 "github.com/skiff-sh/api/go/skiff/registry/v1alpha1"
 )
 
 // ensure the imports are used
@@ -35,8 +33,6 @@ var (
 	_ = (*mail.Address)(nil)
 	_ = anypb.Any{}
 	_ = sort.Sort
-
-	_ = v1alpha1.File_Type(0)
 )
 
 // Validate checks the field values on AddPackageRequest with the rules defined
@@ -792,19 +788,15 @@ func (m *ListPackagesResponse_PackagePreview) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Package
-
-	// no validation rules for Type
+	// no validation rules for Name
 
 	// no validation rules for Registry
+
+	// no validation rules for Description
 
 	// no validation rules for Path
 
 	// no validation rules for JsonSchema
-
-	if m.Description != nil {
-		// no validation rules for Description
-	}
 
 	if len(errors) > 0 {
 		return ListPackagesResponse_PackagePreviewMultiError(errors)
