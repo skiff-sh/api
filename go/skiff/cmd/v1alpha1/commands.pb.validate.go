@@ -57,8 +57,6 @@ func (m *AddPackageRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for ProjectRoot
-
 	// no validation rules for Package
 
 	{
