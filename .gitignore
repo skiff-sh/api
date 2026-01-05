@@ -32,3 +32,4 @@ go.work.sum
 .vscode/
 
 protoc-gen-plain-go/protoc-gen-plain-go
+**/postgen
