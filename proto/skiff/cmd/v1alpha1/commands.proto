@@ -11,17 +11,11 @@ option go_package = "github.com/skiff-sh/api/go/skiff/cmd/v1alpha1";
 // Generates all files within the package and returns the diffs that would result from them being written. Packages hold both templates and WASM plugins that are
 // executed locally to edit local files.
 message AddPackageRequest {
-  // An absolute filepath to the project root. This is used as the root for all plugin file reads and the base reference path for all file outputs.
-  string project_root = 1 [
-    json_name = "project_root",
-    (buf.validate.field).string.min_len = 1
-  ];
-
   // The file path or http(s) URLs to the package. HTTP(s) URLs must start with "http(s)://", otherwise, it's treated as a filepath.
-  string package = 2 [(buf.validate.field).string.min_len = 1];
+  string package = 1 [(buf.validate.field).string.min_len = 1];
 
   // The data needed by the package. Should be a simple map of the field name to the value.
-  map<string, google.protobuf.Value> data = 3;
+  map<string, google.protobuf.Value> data = 2;
 }
 
 // The response data for AddPackageRequest.
@@ -48,11 +42,9 @@ message ListPackagesRequest {
   // The URLs or local file paths to registries e.g. ./.skiff/registry.json.
   repeated string registries = 1;
 
-  // The absolute path to the root of the user's project. Should always be specified to provide appropriate context.
-  string project_root = 2 [
-    json_name = "project_root",
-    (buf.validate.field).string.min_len = 1
-  ];
+  // The absolute path to the root of the user's project. If no registries are provided, this should be populated to provide more context about the user's project.
+  // If registries is empty and this is not populated, the CWD is used.
+  optional string project_root = 2 [json_name = "project_root"];
 }
 
 message ListPackagesResponse {
