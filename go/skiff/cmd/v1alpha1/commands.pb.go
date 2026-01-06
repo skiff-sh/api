@@ -28,10 +28,12 @@ const (
 // executed locally to edit local files.
 type AddPackageRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
+	// An absolute filepath to the project root. This is used as the root for all plugin file reads and the base reference path for all file outputs.
+	ProjectRoot string `protobuf:"bytes,1,opt,name=project_root,proto3" json:"project_root,omitempty"`
 	// The file path or http(s) URLs to the package. HTTP(s) URLs must start with "http(s)://", otherwise, it's treated as a filepath.
-	Package string `protobuf:"bytes,1,opt,name=package,proto3" json:"package,omitempty"`
+	Package string `protobuf:"bytes,2,opt,name=package,proto3" json:"package,omitempty"`
 	// The data needed by the package. Should be a simple map of the field name to the value.
-	Data          map[string]*structpb.Value `protobuf:"bytes,2,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Data          map[string]*structpb.Value `protobuf:"bytes,3,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -64,6 +66,13 @@ func (x *AddPackageRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use AddPackageRequest.ProtoReflect.Descriptor instead.
 func (*AddPackageRequest) Descriptor() ([]byte, []int) {
 	return file_skiff_cmd_v1alpha1_commands_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *AddPackageRequest) GetProjectRoot() string {
+	if x != nil {
+		return x.ProjectRoot
+	}
+	return ""
 }
 
 func (x *AddPackageRequest) GetPackage() string {
@@ -223,7 +232,9 @@ func (x *ViewPackagesResponse) GetPackages() []*v1alpha1.Package {
 type ListPackagesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The URLs or local file paths to registries e.g. ./.skiff/registry.json.
-	Registries    []string `protobuf:"bytes,1,rep,name=registries,proto3" json:"registries,omitempty"`
+	Registries []string `protobuf:"bytes,1,rep,name=registries,proto3" json:"registries,omitempty"`
+	// The absolute path to the root of the user's project. Should always be specified to provide appropriate context.
+	ProjectRoot   string `protobuf:"bytes,2,opt,name=project_root,proto3" json:"project_root,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -263,6 +274,13 @@ func (x *ListPackagesRequest) GetRegistries() []string {
 		return x.Registries
 	}
 	return nil
+}
+
+func (x *ListPackagesRequest) GetProjectRoot() string {
+	if x != nil {
+		return x.ProjectRoot
+	}
+	return ""
 }
 
 type ListPackagesResponse struct {
@@ -394,10 +412,11 @@ var File_skiff_cmd_v1alpha1_commands_proto protoreflect.FileDescriptor
 
 const file_skiff_cmd_v1alpha1_commands_proto_rawDesc = "" +
 	"\n" +
-	"!skiff/cmd/v1alpha1/commands.proto\x12\x12skiff.cmd.v1alpha1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a&skiff/registry/v1alpha1/registry.proto\"\xcc\x01\n" +
-	"\x11AddPackageRequest\x12!\n" +
-	"\apackage\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\apackage\x12C\n" +
-	"\x04data\x18\x02 \x03(\v2/.skiff.cmd.v1alpha1.AddPackageRequest.DataEntryR\x04data\x1aO\n" +
+	"!skiff/cmd/v1alpha1/commands.proto\x12\x12skiff.cmd.v1alpha1\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a&skiff/registry/v1alpha1/registry.proto\"\xf9\x01\n" +
+	"\x11AddPackageRequest\x12+\n" +
+	"\fproject_root\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\fproject_root\x12!\n" +
+	"\apackage\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\apackage\x12C\n" +
+	"\x04data\x18\x03 \x03(\v2/.skiff.cmd.v1alpha1.AddPackageRequest.DataEntryR\x04data\x1aO\n" +
 	"\tDataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
 	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\":\n" +
@@ -406,11 +425,12 @@ const file_skiff_cmd_v1alpha1_commands_proto_rawDesc = "" +
 	"\x13ViewPackagesRequest\x12\x1a\n" +
 	"\bpackages\x18\x01 \x03(\tR\bpackages\"T\n" +
 	"\x14ViewPackagesResponse\x12<\n" +
-	"\bpackages\x18\x01 \x03(\v2 .skiff.registry.v1alpha1.PackageR\bpackages\"5\n" +
+	"\bpackages\x18\x01 \x03(\v2 .skiff.registry.v1alpha1.PackageR\bpackages\"b\n" +
 	"\x13ListPackagesRequest\x12\x1e\n" +
 	"\n" +
 	"registries\x18\x01 \x03(\tR\n" +
-	"registries\"\x86\x02\n" +
+	"registries\x12+\n" +
+	"\fproject_root\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\fproject_root\"\x86\x02\n" +
 	"\x14ListPackagesResponse\x12S\n" +
 	"\bpackages\x18\x01 \x03(\v27.skiff.cmd.v1alpha1.ListPackagesResponse.PackagePreviewR\bpackages\x1a\x98\x01\n" +
 	"\x0ePackagePreview\x12\x12\n" +

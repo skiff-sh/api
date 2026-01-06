@@ -57,6 +57,8 @@ func (m *AddPackageRequest) validate(all bool) error {
 
 	var errors []error
 
+	// no validation rules for ProjectRoot
+
 	// no validation rules for Package
 
 	{
@@ -546,6 +548,8 @@ func (m *ListPackagesRequest) validate(all bool) error {
 	}
 
 	var errors []error
+
+	// no validation rules for ProjectRoot
 
 	if len(errors) > 0 {
 		return ListPackagesRequestMultiError(errors)
