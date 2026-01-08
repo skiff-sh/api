@@ -63,6 +63,17 @@ func InlineBundledSchemasInFS(fsys fs.FS) (map[string][]byte, error) {
 		// - remove all $defs everywhere
 		resolved = stripKeys(resolved, true /*keepTopLevelSchema*/)
 
+		if v, ok := resolved.(map[string]any); ok {
+			prop := v["properties"]
+			if prop != nil {
+				if p, ok := prop.(map[string]any); ok {
+					p["$schema"] = map[string]any{
+						"type": "string",
+					}
+				}
+			}
+		}
+
 		out, err := json.MarshalIndent(resolved, "", "  ")
 		if err != nil {
 			return fmt.Errorf("marshal %s: %w", path, err)
