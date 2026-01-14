@@ -175,7 +175,7 @@ func (x *ViewPackagesRequest) GetPackages() []string {
 
 type ViewPackagesResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Returns the entirety of the contents of the package. If the package contains a plugin file, the contents of the file are not returned as they are just WASM bytes.
+	// A list of URLs and/or filepaths to packages. Returns the entirety of the contents of the package. If the package contains a plugin file, the contents of the file are not returned as they are just WASM bytes.
 	Packages      []*v1alpha1.Package `protobuf:"bytes,1,rep,name=packages,proto3" json:"packages,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

@@ -117,18 +117,15 @@ message File {
     plugin = 1;
   }
 
-  // The source of the contents for this File. This does not need to be populated manually. All fields are mutually exclusive.
+  // The source of the contents for this File. This does not need to be populated manually. All fields are mutually exclusive. If populated at build time,
+  // it will be skipped. This enables users to populate files like plugins with custom WASM implementations.
   message Source {
-    // The raw contents of the file. This field is set if the data is binary.
-    optional bytes raw = 1;
+    // The contents of the file can be found at another path. Supports both HTTP(S), relative, and absolute unix file paths.
+    // If the path is relative, it is relative to the registry.json file.
+    optional string path = 1;
 
     // The text contents of the file. This field will be populated if the file contains valid UTF-8 text.
     optional string text = 2;
-
-    // The index of the file that contains the contents within the same package. This is useful for plugins as the contents
-    // can be large. It is better to have a single plugin that can handle multiple files than to have 1 unique plugin per
-    // file.
-    optional int32 file_index = 3 [json_name = "file_index"];
   }
 
   // The path to the file relative to the root of the registry. The root of the registry is the directory housing your 'registry.json' file. Cannot be outside of the registry root.
